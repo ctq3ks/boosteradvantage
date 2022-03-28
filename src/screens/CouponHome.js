@@ -61,7 +61,7 @@ const BusinessList = () => {
     let queryvalue = !salon ? "SALON" : !restaurant ? "RESTAURANT" : "SERVICE";
     let ifFiltered = !salon || !restaurant || !services;
 
-    const subscription = DataStore.observeQuery(Coupon, c => ifFiltered ? c.category("contains", queryvalue) : c).subscribe((snapshot) => {
+    const subscription = DataStore.observeQuery(Coupon, c => ifFiltered ? c.category("eq", queryvalue) : c).subscribe((snapshot) => {
       //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.business.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
       const { items, isSynced } = snapshot;
       setCoupons(items);
