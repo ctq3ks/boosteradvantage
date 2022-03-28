@@ -52,7 +52,7 @@ const FilterCouponModals = () => {
   }
 
 
-const CouponList = () => {
+const BusinessList = () => {
   const [Coupons, setCoupons] = useState([]);
   //const subscription = await DataStore.query(Coupon).filter(c => c.business.name === "restaurant");
   useEffect(() => {
@@ -106,7 +106,7 @@ const CouponList = () => {
           <Text style={services ? styles.categoryText : styles.categoryTextPressed}>Services</Text>
         </Pressable>
       </View>
-      <CouponList />
+      <BusinessList />
     </View>
   );
 };
