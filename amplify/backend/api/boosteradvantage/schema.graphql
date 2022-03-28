@@ -1,0 +1,36 @@
+enum CouponCategory {
+  RESTAURANT
+  SALON
+  SERVICE
+}
+
+type BoosterPass @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
+  isUsed: Boolean
+}
+
+type User @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
+  email: AWSEmail
+  phonenumber: AWSPhone
+  username: String
+  Coupons: [Coupon] @hasMany(indexName: "byUser", fields: ["id"])
+  BoosterPass: BoosterPass @hasOne
+}
+
+type Business @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
+  name: String!
+  description: String
+  coupons: [Coupon] @hasMany
+}
+
+type Coupon @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID
+  description: String
+  business: Business @belongsTo
+  userID: ID @index(name: "byUser")
+  userSelected: Boolean
+  category: CouponCategory
+}
+ 
