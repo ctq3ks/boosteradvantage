@@ -14,7 +14,21 @@ export const schema = {
                     "name": "isUsed",
                     "isArray": false,
                     "type": "Boolean",
-                    "isRequired": false,
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userSub": {
+                    "name": "userSub",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -40,6 +54,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -107,16 +130,16 @@ export const schema = {
                 },
                 "BoosterPass": {
                     "name": "BoosterPass",
-                    "isArray": false,
+                    "isArray": true,
                     "type": {
                         "model": "BoosterPass"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "userBoosterPassId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "userID"
                     }
                 },
                 "createdAt": {
@@ -134,13 +157,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "userBoosterPassId": {
-                    "name": "userBoosterPassId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -179,20 +195,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "description": {
-                    "name": "description",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "business": {
                     "name": "business",
                     "isArray": false,
                     "type": {
                         "model": "Business"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
@@ -206,20 +215,34 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "userSelected": {
-                    "name": "userSelected",
+                "couponType": {
+                    "name": "couponType",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": {
+                        "enum": "CouponType"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "currentPrice": {
+                    "name": "currentPrice",
+                    "isArray": false,
+                    "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
-                "category": {
-                    "name": "category",
+                "discountPrice": {
+                    "name": "discountPrice",
                     "isArray": false,
-                    "type": {
-                        "enum": "CouponCategory"
-                    },
+                    "type": "Float",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "itemDescription": {
+                    "name": "itemDescription",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "createdAt": {
@@ -291,11 +314,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "description": {
-                    "name": "description",
+                "location": {
+                    "name": "location",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "coupons": {
@@ -311,6 +334,15 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "businessCouponsId"
                     }
+                },
+                "category": {
+                    "name": "category",
+                    "isArray": false,
+                    "type": {
+                        "enum": "BusinessCategory"
+                    },
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -357,8 +389,15 @@ export const schema = {
         }
     },
     "enums": {
-        "CouponCategory": {
-            "name": "CouponCategory",
+        "CouponType": {
+            "name": "CouponType",
+            "values": [
+                "PRICE",
+                "ITEM"
+            ]
+        },
+        "BusinessCategory": {
+            "name": "BusinessCategory",
             "values": [
                 "RESTAURANT",
                 "SALON",
@@ -367,5 +406,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "5f4239932855f1d94333ed32b34063dd"
+    "version": "446ddf9d4e2b001743e9d468bedae806"
 };

@@ -10,7 +10,8 @@
           },
           "additionalAuthenticationProviders": []
         }
-      }
+      },
+      "dependsOn": []
     }
   },
   "auth": {
@@ -40,6 +41,13 @@
           "EMAIL"
         ]
       }
+    }
+  },
+  "storage": {
+    "s3boosteradvantagestorage4d0f883c": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   }
 }

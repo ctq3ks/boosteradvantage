@@ -2,7 +2,12 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-const CouponCategory = {
+const CouponType = {
+  "PRICE": "PRICE",
+  "ITEM": "ITEM"
+};
+
+const BusinessCategory = {
   "RESTAURANT": "RESTAURANT",
   "SALON": "SALON",
   "SERVICE": "SERVICE"
@@ -15,5 +20,6 @@ export {
   User,
   Coupon,
   Business,
-  CouponCategory
+  CouponType,
+  BusinessCategory
 };
