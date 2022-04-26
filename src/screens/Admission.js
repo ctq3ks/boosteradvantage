@@ -26,7 +26,7 @@ import { DataStore } from "@aws-amplify/datastore";
 import * as queries from "../graphql/queries";
 import { S3Image } from "aws-amplify-react-native";
 import { AmplifyS3Image, IconBluetooth } from "@aws-amplify/ui-react";
-import { Business, Coupon } from "../models";
+import { Business, Coupon, BoosterPass } from "../models";
 import { Storage } from "@aws-amplify/storage";
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
@@ -35,7 +35,7 @@ import { Storage } from "@aws-amplify/storage";
 
 const Header = () => (
   <View style={styles.headerContainer}>
-    <Text style={styles.headerTitle}>Seahawk Sponsors</Text>
+    <Text style={styles.headerTitle}>Let's Go Seahawks!!!</Text>
   </View>
 );
 
@@ -46,8 +46,9 @@ const FilterBoosterPassModalswithList = () => {
   const [isRedeemBoosterVisible, setIsRedeemBoosterVisible] =
     React.useState(false);
 
-  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] =
-    React.useState(styles.BoosterPassContainerModal);
+  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] = React.useState(
+    styles.BoosterPassContainerModal
+  );
 
   const handleBoosterModal = () =>
     setIsRedeemBoosterVisible(() => !isRedeemBoosterVisible);
@@ -56,10 +57,16 @@ const FilterBoosterPassModalswithList = () => {
     const [BoosterPasses, setBoosterPasses] = useState([]);
     const [Coupons, setCoupons] = useState([]);
 
+    const redeem = ( pass ) => DataStore.save(
+      BoosterPass.copyOf(pass, updated => {
+        updated.isUsed = !pass.isUsed;
+      })
+    );
+
     useEffect(async () => {
       //query the initial Coupon list and subscribe to data updates
-      const subscriptioncoupon = await DataStore.observeQuery(
-        Business
+      const subscription = await DataStore.observeQuery(
+        BoosterPass
       ).subscribe((snapshot) => {
         //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.BoosterPass.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
         //BoosterPass, c => ifFiltered ? c.category("eq", queryvalue) : c
@@ -69,7 +76,7 @@ const FilterBoosterPassModalswithList = () => {
 
       //unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
       return function cleanup() {
-        subscriptioncoupon.unsubscribe();
+        subscription.unsubscribe();
       };
     }, []);
 
@@ -97,11 +104,28 @@ const FilterBoosterPassModalswithList = () => {
             ></Ionicons>
             <View style={styles.BoosterPassesContainerModal}>
               {BoosterPasses.map((item) => {
-                const data = Coupons.filter(
-                  (coup) => coup.BoosterPass.id == item.id
-                );
+                // const data = Coupons.filter(
+                //   (coup) => coup.BoosterPass.id == item.id
+                // );
+                // useEffect(async () => {
+                //   const redeem = ( pass ) => DataStore.save(
+                //     BoosterPass.copyOf(pass, updated => {
+                //       updated.isUsed = !pass.isUsed;
+                //     })
+                //   );
+                // }, []);
+                
+                // const redeem = ( pass ) => await DataStore.save(
+                //   BoosterPass.copyOf(pass, updated => {
+                //     updated.isUsed = !pass.isUsed;
+                //   })
+                // );
                 return (
-                  <View key={item.id} style={styles.BoosterPassContainerModalSelected}>
+                  <TouchableOpacity
+                    onPress={() => redeem(item)}
+                    key={item.id}
+                    style={ item.isUsed ? styles.BoosterPassContainerModal : styles.BoosterPassContainerModalUnselected}
+                  >
                     <ImageBackground
                       source={require("../../assets/boosterpassbackground1.jpeg")}
                       imageStyle={{ borderRadius: 20, opacity: 0.3 }}
@@ -110,7 +134,7 @@ const FilterBoosterPassModalswithList = () => {
                     >
                       <View style={styles.BoosterPassHeader}>
                         <Text style={styles.BoosterPassHeaderText1}>
-                          All Sports - Adult
+                          All Sports - {item.type}
                         </Text>
                         <Text style={styles.BoosterPassHeaderText2}>
                           Spring Season Pass
@@ -155,7 +179,7 @@ const FilterBoosterPassModalswithList = () => {
                         />
                       </View>
                     </ImageBackground>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
               <View style={styles.redeemContainer}>
@@ -163,7 +187,6 @@ const FilterBoosterPassModalswithList = () => {
               </View>
             </View>
 
-              
             {/* <View style={styles.centeredView}>
               <View style={styles.modalView}>
                 <Text style={styles.modalText}>Hello World!</Text>
@@ -182,9 +205,9 @@ const FilterBoosterPassModalswithList = () => {
           style={styles.BoosterPassesContainer}
         >
           {BoosterPasses.map((item) => {
-            const data = Coupons.filter(
-              (coup) => coup.BoosterPass.id == item.id
-            );
+            // const data = Coupons.filter(
+            //   (coup) => coup.BoosterPass.id == item.id
+            // );
             return (
               <View key={item.id} style={styles.BoosterPassContainer}>
                 <ImageBackground
@@ -195,7 +218,7 @@ const FilterBoosterPassModalswithList = () => {
                 >
                   <View style={styles.BoosterPassHeader}>
                     <Text style={styles.BoosterPassHeaderText1}>
-                      All Sports - Adult
+                      All Sports - {item.type}
                     </Text>
                     <Text style={styles.BoosterPassHeaderText2}>
                       Spring Season Pass
@@ -258,7 +281,7 @@ const FilterBoosterPassModalswithList = () => {
 const Admission = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <FilterBoosterPassModalswithList />
       {/* <BoosterPassList /> */}
     </>
@@ -274,7 +297,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     color: "#2E5DB5",
     fontSize: 27,
-    fontWeight: "700",
+    fontWeight: "500",
     paddingVertical: 6,
     textAlign: "center",
     shadowOffset: {
@@ -325,7 +348,7 @@ const styles = StyleSheet.create({
     shadowColor: "gray",
   },
   BoosterPassContainerModal: {
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     borderRadius: 20,
     // borderBottomRightRadius: 20,
     // borderBottomLeftRadius: 20,
@@ -344,12 +367,12 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowColor: "gray",
   },
-  BoosterPassContainerModalSelected: {
+  BoosterPassContainerModalUnselected: {
     backgroundColor: "white",
     borderRadius: 20,
     // borderBottomRightRadius: 20,
     // borderBottomLeftRadius: 20,
-    opacity: .4,
+    opacity: 0.4,
     elevation: 4,
     height: 370,
     flexDirection: "row",

@@ -17,18 +17,18 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "userSub": {
-                    "name": "userSub",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "userID": {
                     "name": "userID",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -406,5 +406,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "446ddf9d4e2b001743e9d468bedae806"
+    "version": "c37b3561f689aa0cfd4718f2b977bd59"
 };

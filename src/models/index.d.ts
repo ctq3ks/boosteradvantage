@@ -32,8 +32,8 @@ type BusinessMetaData = {
 export declare class BoosterPass {
   readonly id: string;
   readonly isUsed: boolean;
-  readonly userSub: string;
   readonly userID: string;
+  readonly type?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<BoosterPass, BoosterPassMetaData>);

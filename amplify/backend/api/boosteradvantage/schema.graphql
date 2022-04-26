@@ -12,8 +12,8 @@ enum BusinessCategory {
 type BoosterPass @model @auth(rules: [{allow: private, provider: iam}]) {
   id: ID!
   isUsed: Boolean!
-  userSub: String!
   userID: ID! @index(name: "byUser")
+  type: String
 }
 
 type User @model @auth(rules: [{allow: private, provider: iam}]) {

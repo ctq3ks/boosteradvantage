@@ -67,7 +67,7 @@ const App = () => {
         <Tab.Screen name="Schedule" options={{headerShown: false}}  component={Schedule} />
         <Tab.Screen name="Sponsors" options={{headerShown: false}}  component={BusinessHome} />
         {/* <Tab.Screen name="Booster" options={{headerShown: false}}  component={BusinessHome} /> */}
-        <Tab.Screen name="Admission" component={BoosterPass} />
+        <Tab.Screen name="Admission" options={{headerShown: false}} component={BoosterPass} />
       </Tab.Navigator>
     </NavigationContainer>
     </SafeAreaView>
