@@ -14,6 +14,7 @@ import {
   Animated,
   ImageBackground,
   TouchableOpacity,
+  TouchableHighlight,
 } from "react-native";
 import { API, withSSRContext } from "aws-amplify";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -39,16 +40,27 @@ const Header = () => (
   </View>
 );
 
+// function redeem (pass) {
+//   useEffect(() => {
+//       // let mounted = true;
+//       // if (mounted){
+//     DataStore.save(
+//     BoosterPass.copyOf(pass, (updated) => {
+//       updated.isUsed = !pass.isUsed;
+//       })
+//     )
+//   }, []); 
+//   // if (mounted){
+// }
+
 const FilterBoosterPassModalswithList = () => {
   // const [restaurant, setRestaurant] = useState(true);
   // const [salon, setSalon] = useState(true);
   // const [services, setServices] = useState(true);
-  const [isRedeemBoosterVisible, setIsRedeemBoosterVisible] =
-    React.useState(false);
 
-  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] = React.useState(
-    styles.BoosterPassContainerModal
-  );
+
+  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] = React.useState(false);
+
 
   const handleBoosterModal = () =>
     setIsRedeemBoosterVisible(() => !isRedeemBoosterVisible);
@@ -57,27 +69,25 @@ const FilterBoosterPassModalswithList = () => {
     const [BoosterPasses, setBoosterPasses] = useState([]);
     const [Coupons, setCoupons] = useState([]);
 
-    const redeem = ( pass ) => DataStore.save(
-      BoosterPass.copyOf(pass, updated => {
-        updated.isUsed = !pass.isUsed;
-      })
-    );
-
+    const [isRedeemBoosterVisible, setIsRedeemBoosterVisible] = React.useState(false);
+    
     useEffect(async () => {
       //query the initial Coupon list and subscribe to data updates
-      const subscription = await DataStore.observeQuery(
-        BoosterPass
-      ).subscribe((snapshot) => {
-        //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.BoosterPass.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
-        //BoosterPass, c => ifFiltered ? c.category("eq", queryvalue) : c
-        const { items, isSynced } = snapshot;
-        setBoosterPasses(items);
-      });
+      const subscription = await DataStore.observeQuery(BoosterPass).subscribe(
+        (snapshot) => {
+          //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.BoosterPass.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
+          //BoosterPass, c => ifFiltered ? c.category("eq", queryvalue) : c
+          const { items, isSynced } = snapshot;
+          setBoosterPasses(items);
+        }
+      );
 
       //unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
       return function cleanup() {
         subscription.unsubscribe();
+        // setIsRedeemBoosterVisible(false);
       };
+
     }, []);
 
     return (
@@ -104,27 +114,36 @@ const FilterBoosterPassModalswithList = () => {
             ></Ionicons>
             <View style={styles.BoosterPassesContainerModal}>
               {BoosterPasses.map((item) => {
-                // const data = Coupons.filter(
-                //   (coup) => coup.BoosterPass.id == item.id
-                // );
-                // useEffect(async () => {
-                //   const redeem = ( pass ) => DataStore.save(
-                //     BoosterPass.copyOf(pass, updated => {
+
+                // const redeem = (pass) => {
+                //   useEffect( async () => {
+                //   // let mounted = true;
+                //   // if (mounted){
+                //     await DataStore.save(
+                //     BoosterPass.copyOf(pass, (updated) => {
                 //       updated.isUsed = !pass.isUsed;
-                //     })
-                //   );
-                // }, []);
-                
-                // const redeem = ( pass ) => await DataStore.save(
-                //   BoosterPass.copyOf(pass, updated => {
-                //     updated.isUsed = !pass.isUsed;
-                //   })
-                // );
+                //       })
+                //     )
+                //   }, []); 
+                // }
+                const redeem = async pass => {
+                  
+                  await DataStore.save(
+                    BoosterPass.copyOf(pass, (updated) => {
+                      updated.isUsed = !pass.isUsed;
+                      })
+                    )
+                  };
+
                 return (
                   <TouchableOpacity
-                    onPress={() => redeem(item)}
                     key={item.id}
-                    style={ item.isUsed ? styles.BoosterPassContainerModal : styles.BoosterPassContainerModalUnselected}
+                    style={
+                      item.isUsed
+                        ? styles.BoosterPassContainerModalUnselected
+                        : styles.BoosterPassContainerModal
+                    }
+                    onLongPress={() => redeem(item)}
                   >
                     <ImageBackground
                       source={require("../../assets/boosterpassbackground1.jpeg")}
@@ -205,9 +224,6 @@ const FilterBoosterPassModalswithList = () => {
           style={styles.BoosterPassesContainer}
         >
           {BoosterPasses.map((item) => {
-            // const data = Coupons.filter(
-            //   (coup) => coup.BoosterPass.id == item.id
-            // );
             return (
               <View key={item.id} style={styles.BoosterPassContainer}>
                 <ImageBackground
