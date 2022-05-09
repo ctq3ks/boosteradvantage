@@ -1,5 +1,3 @@
-
-
 enum CouponType {
   PRICE
   ITEM
