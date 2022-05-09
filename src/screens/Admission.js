@@ -15,6 +15,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { API, withSSRContext } from "aws-amplify";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -36,254 +37,219 @@ import { Storage } from "@aws-amplify/storage";
 
 const Header = () => (
   <View style={styles.headerContainer}>
-    <Text style={styles.headerTitle}>Let's Go Seahawks!!!</Text>
+    <Text style={styles.headerTitle}>Let's Go Seahawks!</Text>
   </View>
 );
-
-// function redeem (pass) {
-//   useEffect(() => {
-//       // let mounted = true;
-//       // if (mounted){
-//     DataStore.save(
-//     BoosterPass.copyOf(pass, (updated) => {
-//       updated.isUsed = !pass.isUsed;
-//       })
-//     )
-//   }, []); 
-//   // if (mounted){
-// }
 
 const FilterBoosterPassModalswithList = () => {
   // const [restaurant, setRestaurant] = useState(true);
   // const [salon, setSalon] = useState(true);
   // const [services, setServices] = useState(true);
 
-
-  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] = React.useState(false);
-
+  const [isBoosterPassRedeemed, setIsBoosterPassRedeemed] =
+    React.useState(false);
 
   const handleBoosterModal = () =>
     setIsRedeemBoosterVisible(() => !isRedeemBoosterVisible);
 
   const BoosterPasses = () => {
     const [BoosterPasses, setBoosterPasses] = useState([]);
-    const [Coupons, setCoupons] = useState([]);
 
-    const [isRedeemBoosterVisible, setIsRedeemBoosterVisible] = React.useState(false);
-    
-    useEffect(async () => {
-      //query the initial Coupon list and subscribe to data updates
-      const subscription = await DataStore.observeQuery(BoosterPass).subscribe(
-        (snapshot) => {
+    const [isPassRedeemed, setIsPassRedeemed] = React.useState(false);
+    const [isRedeemDropdownVisible, setIsRedeemDropdownVisible] =
+      React.useState(false);
+
+    useEffect(() => {
+      //query the initial Coupon list and subscribe to data updates (Business, (c) => ifFiltered ? c.category("eq", queryvalue) : c) , (c) => c.isUsed("eq", false)
+      async function fetchPasses() {
+        const subscription = await DataStore.observeQuery(
+          BoosterPass
+        ).subscribe((snapshot) => {
           //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.BoosterPass.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
           //BoosterPass, c => ifFiltered ? c.category("eq", queryvalue) : c
           const { items, isSynced } = snapshot;
           setBoosterPasses(items);
-        }
-      );
-
+        });
+        return function cleanup() {
+          subscription.unsubscribe();
+          // setIsRedeemBoosterVisible(false);
+        };
+      }
+      fetchPasses();
       //unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
-      return function cleanup() {
-        subscription.unsubscribe();
-        // setIsRedeemBoosterVisible(false);
-      };
-
     }, []);
 
-    return (
-      <SafeAreaView>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isRedeemBoosterVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setIsRedeemBoosterVisible(!isRedeemBoosterVisible);
-          }}
+    function RenderPass(pass) {
+      if (pass.isUsed) {
+        return <RenderRedeemedPass type={pass.type} isUsed={pass.isUsed} />;
+      }
+      return <RenderUnredeemedPass type={pass.type} isUsed={pass.isUsed} />;
+    }
+
+    const RenderRedeemedPass = (pass) => (
+      <ImageBackground
+        source={require("../../assets/boosterpassbackground1.jpeg")}
+        imageStyle={{ borderRadius: 20, opacity: 0.3 }}
+        resizeMode="cover"
+        style={styles.backgroundimage}
+      >
+        <ImageBackground
+          source={require("../../assets/redeemed.png")}
+          imageStyle={{ borderRadius: 20, opacity: 0.7 }}
+          resizeMode="cover"
+          style={styles.backgroundimage}
         >
-          <ScrollView
-            style={styles.scrollviewcontainer}
-            contentContainerStyle={{ paddingBottom: 50, paddingTop: 20 }}
-            bounces={true}
-          >
-            <Ionicons
-              name={"close-outline"}
-              size={40}
-              color={"black"}
-              onPress={() => setIsRedeemBoosterVisible(!isRedeemBoosterVisible)}
-            ></Ionicons>
-            <View style={styles.BoosterPassesContainerModal}>
-              {BoosterPasses.map((item) => {
-
-                // const redeem = (pass) => {
-                //   useEffect( async () => {
-                //   // let mounted = true;
-                //   // if (mounted){
-                //     await DataStore.save(
-                //     BoosterPass.copyOf(pass, (updated) => {
-                //       updated.isUsed = !pass.isUsed;
-                //       })
-                //     )
-                //   }, []); 
-                // }
-                const redeem = async pass => {
-                  
-                  await DataStore.save(
-                    BoosterPass.copyOf(pass, (updated) => {
-                      updated.isUsed = !pass.isUsed;
-                      })
-                    )
-                  };
-
-                return (
-                  <TouchableOpacity
-                    key={item.id}
-                    style={
-                      item.isUsed
-                        ? styles.BoosterPassContainerModalUnselected
-                        : styles.BoosterPassContainerModal
-                    }
-                    onLongPress={() => redeem(item)}
-                  >
-                    <ImageBackground
-                      source={require("../../assets/boosterpassbackground1.jpeg")}
-                      imageStyle={{ borderRadius: 20, opacity: 0.3 }}
-                      resizeMode="cover"
-                      style={styles.backgroundimage}
-                    >
-                      <View style={styles.BoosterPassHeader}>
-                        <Text style={styles.BoosterPassHeaderText1}>
-                          All Sports - {item.type}
-                        </Text>
-                        <Text style={styles.BoosterPassHeaderText2}>
-                          Spring Season Pass
-                        </Text>
-                      </View>
-                      <View style={styles.BoosterPassSLContainer}>
-                        <Image
-                          style={styles.BoosterPassLogo}
-                          source={require("../../assets/southlakes.png")}
-                        />
-                        <View style={styles.BoosterPassTextIconsContainer}>
-                          <Text style={styles.BoosterPassLogosContainerText}>
-                            South Lakes Seahawks
-                          </Text>
-                          <View style={styles.BoosterPassIconsContainer}>
-                            <Image
-                              style={styles.BoosterPassSLContainerIcons}
-                              source={require("../../assets/baseball-ball.png")}
-                            />
-                            <Image
-                              style={styles.BoosterPassSLContainerIcons}
-                              source={require("../../assets/field.png")}
-                            />
-                            <Image
-                              style={styles.BoosterPassSLContainerIcons}
-                              source={require("../../assets/soccer-ball-variant.png")}
-                            />
-                            <Image
-                              style={styles.BoosterPassSLContainerIcons}
-                              source={require("../../assets/lacrosse.png")}
-                            />
-                          </View>
-                        </View>
-                      </View>
-                      <View style={styles.BoosterPassFooterContainer}>
-                        <Text style={styles.BoosterPassFooterText}>
-                          {/* Featured Sponsor: */}
-                        </Text>
-                        <Image
-                          style={styles.BoosterPassFooterImage}
-                          source={require("../../assets/glorydaysgrill_logo.png")}
-                        />
-                      </View>
-                    </ImageBackground>
-                  </TouchableOpacity>
-                );
-              })}
-              <View style={styles.redeemContainer}>
-                <Text style={styles.redeemText}>Redeem</Text>
+          <View style={styles.BoosterPassHeaderRedeemed}>
+            <Text style={styles.BoosterPassHeaderText1Redeemed}>
+              All Sports - {pass.type}
+            </Text>
+            <Text style={styles.BoosterPassHeaderText2}>
+              Spring Season Pass
+            </Text>
+          </View>
+          <View style={styles.BoosterPassSLContainerRedeemed}>
+            <Image
+              style={styles.BoosterPassLogo}
+              source={require("../../assets/southlakes.png")}
+            />
+            <View style={styles.BoosterPassTextIconsContainer}>
+              <Text style={styles.BoosterPassLogosContainerText}>
+                South Lakes Seahawks
+              </Text>
+              <View style={styles.BoosterPassIconsContainer}>
+                <Image
+                  style={styles.BoosterPassSLContainerIcons}
+                  source={require("../../assets/baseball-ball.png")}
+                />
+                <Image
+                  style={styles.BoosterPassSLContainerIcons}
+                  source={require("../../assets/field.png")}
+                />
+                <Image
+                  style={styles.BoosterPassSLContainerIcons}
+                  source={require("../../assets/soccer-ball-variant.png")}
+                />
+                <Image
+                  style={styles.BoosterPassSLContainerIcons}
+                  source={require("../../assets/lacrosse.png")}
+                />
               </View>
             </View>
+          </View>
+          <View style={styles.BoosterPassFooterContainerRedeemed}>
+            <Text style={styles.BoosterPassFooterText}>
+              {/* Featured Sponsor: */}
+            </Text>
+            <Image
+              style={styles.BoosterPassFooterImage}
+              source={require("../../assets/boostersponsor.png")}
+            />
+          </View>
+        </ImageBackground>
+      </ImageBackground>
+    );
+    const RenderUnredeemedPass = (pass) => (
+      <ImageBackground
+        source={require("../../assets/boosterpassbackground1.jpeg")}
+        imageStyle={{ borderRadius: 20, opacity: 0.3 }}
+        resizeMode="cover"
+        style={styles.backgroundimage}
+      >
+        <View style={styles.BoosterPassHeader}>
+          <Text style={styles.BoosterPassHeaderText1}>
+            All Sports - {pass.type}
+          </Text>
+          <Text style={styles.BoosterPassHeaderText2}>Spring Season Pass</Text>
+        </View>
+        <View style={styles.BoosterPassSLContainer}>
+          <Image
+            style={styles.BoosterPassLogo}
+            source={require("../../assets/southlakes.png")}
+          />
+          <View style={styles.BoosterPassTextIconsContainer}>
+            <Text style={styles.BoosterPassLogosContainerText}>
+              South Lakes Seahawks
+            </Text>
+            <View style={styles.BoosterPassIconsContainer}>
+              <Image
+                style={styles.BoosterPassSLContainerIcons}
+                source={require("../../assets/baseball-ball.png")}
+              />
+              <Image
+                style={styles.BoosterPassSLContainerIcons}
+                source={require("../../assets/field.png")}
+              />
+              <Image
+                style={styles.BoosterPassSLContainerIcons}
+                source={require("../../assets/soccer-ball-variant.png")}
+              />
+              <Image
+                style={styles.BoosterPassSLContainerIcons}
+                source={require("../../assets/lacrosse.png")}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.BoosterPassFooterContainer}>
+          <Text style={styles.BoosterPassFooterText}>
+            {/* Featured Sponsor: */}
+          </Text>
+          <Image
+            style={styles.BoosterPassFooterImage}
+            source={require("../../assets/boostersponsor.png")}
+          />
+        </View>
+      </ImageBackground>
+    );
 
-            {/* <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Hello World!</Text>
-                
-              </View>
-            </View> */}
-          </ScrollView>
-        </Modal>
-        {/* <ScrollView 
-        onScroll={event => { scrollY = event.nativeEvent.contentOffset.y; }} 
-        scrollEventThrottle={16} 
-        contentContainerStyle={{ paddingBottom: 165 }}
-        bounces={false}> */}
-        <TouchableOpacity
-          onPress={() => setIsRedeemBoosterVisible(true)}
+    return (
+      // <SafeAreaView >
+      // <TouchableOpacity
+      //   //onPress={() => setIsRedeemBoosterVisible(true)}
+      //   onLongPress={() => setIsRedeemBoosterVisible(!isRedeemBoosterVisible)}
+      //   style={ styles.BoosterPassesContainer }
+      // >
+      // {/* <View style={ styles.BoosterPassesContainerScroll }> */}
+      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+        <View
+          //onPress={() => setIsRedeemBoosterVisible(true)}
+          // onLongPress={() => setIsRedeemBoosterVisible(!isRedeemBoosterVisible)}
           style={styles.BoosterPassesContainer}
         >
           {BoosterPasses.map((item) => {
+            const redeem = async (pass) => {
+              await DataStore.save(
+                BoosterPass.copyOf(pass, (updated) => {
+                  updated.isUsed = !pass.isUsed;
+                })
+              );
+            };
+
             return (
-              <View key={item.id} style={styles.BoosterPassContainer}>
-                <ImageBackground
-                  source={require("../../assets/boosterpassbackground1.jpeg")}
-                  imageStyle={{ borderRadius: 20, opacity: 0.3 }}
-                  resizeMode="cover"
-                  style={styles.backgroundimage}
+              <TouchableWithoutFeedback
+                //onPress={() => setIsRedeemBoosterVisible(true)}
+                key={item.id}
+                onPress={() =>
+                  setIsRedeemDropdownVisible(!isRedeemDropdownVisible)
+                }
+                onLongPress={() => redeem(item)}
+              >
+                <View
+                  style={
+                    item.isUsed && isRedeemDropdownVisible
+                      ? styles.BoosterPassContainerModal
+                      : isRedeemDropdownVisible
+                      ? styles.BoosterPassContainerModalUnselected
+                      : styles.BoosterPassContainer
+                  }
                 >
-                  <View style={styles.BoosterPassHeader}>
-                    <Text style={styles.BoosterPassHeaderText1}>
-                      All Sports - {item.type}
-                    </Text>
-                    <Text style={styles.BoosterPassHeaderText2}>
-                      Spring Season Pass
-                    </Text>
-                  </View>
-                  <View style={styles.BoosterPassSLContainer}>
-                    <Image
-                      style={styles.BoosterPassLogo}
-                      source={require("../../assets/southlakes.png")}
-                    />
-                    <View style={styles.BoosterPassTextIconsContainer}>
-                      <Text style={styles.BoosterPassLogosContainerText}>
-                        South Lakes Seahawks
-                      </Text>
-                      <View style={styles.BoosterPassIconsContainer}>
-                        <Image
-                          style={styles.BoosterPassSLContainerIcons}
-                          source={require("../../assets/baseball-ball.png")}
-                        />
-                        <Image
-                          style={styles.BoosterPassSLContainerIcons}
-                          source={require("../../assets/field.png")}
-                        />
-                        <Image
-                          style={styles.BoosterPassSLContainerIcons}
-                          source={require("../../assets/soccer-ball-variant.png")}
-                        />
-                        <Image
-                          style={styles.BoosterPassSLContainerIcons}
-                          source={require("../../assets/lacrosse.png")}
-                        />
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.BoosterPassFooterContainer}>
-                    <Text style={styles.BoosterPassFooterText}>
-                      {/* Featured Sponsor: */}
-                    </Text>
-                    <Image
-                      style={styles.BoosterPassFooterImage}
-                      source={require("../../assets/glorydaysgrill_logo.png")}
-                    />
-                  </View>
-                </ImageBackground>
-              </View>
+                  <RenderPass type={item.type} isUsed={item.isUsed} />
+                </View>
+              </TouchableWithoutFeedback>
             );
           })}
-        </TouchableOpacity>
-      </SafeAreaView>
+        </View>
+      </ScrollView>
     );
   };
 
@@ -312,7 +278,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#2E5DB5",
-    fontSize: 27,
+    fontSize: 22,
     fontWeight: "500",
     paddingVertical: 6,
     textAlign: "center",
@@ -323,28 +289,34 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 5,
   },
-  scrollviewcontainer: {
-    backgroundColor: "white",
+  BoosterPassesContainerScroll: {
+    flex: 5,
+    // flexDirection: "column",
+    marginTop: 8,
+    marginHorizontal: 20,
   },
   BoosterPassesContainer: {
     flex: 1,
+    minHeight: 460,
     flexDirection: "column",
     // flexWrap: "wrap",
     marginTop: 8,
     marginHorizontal: 20,
-    backgroundColor: "black",
+    // backgroundColor: "black",
   },
 
-  BoosterPassesContainerModal: {
-    flex: 1,
-    flexDirection: "column",
-    // flexWrap: "wrap",
-    marginHorizontal: 20,
-  },
+  // BoosterPassesContainerModal: {
+  //   flex: 1,
+  //   flexDirection: "column",
+  //   // flexWrap: "wrap",
+  //   marginTop: 8,
+  //   marginHorizontal: 20,
+  // },
 
   BoosterPassContainer: {
     backgroundColor: "white",
     borderRadius: 20,
+    opacity: 1,
     // borderBottomRightRadius: 20,
     // borderBottomLeftRadius: 20,
     elevation: 4,
@@ -352,6 +324,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     marginBottom: -344,
+
     marginHorizontal: 12,
     marginVertical: 8,
     justifyContent: "center",
@@ -364,8 +337,9 @@ const styles = StyleSheet.create({
     shadowColor: "gray",
   },
   BoosterPassContainerModal: {
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     borderRadius: 20,
+    opacity: 1,
     // borderBottomRightRadius: 20,
     // borderBottomLeftRadius: 20,
     elevation: 4,
@@ -388,7 +362,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     // borderBottomRightRadius: 20,
     // borderBottomLeftRadius: 20,
-    opacity: 0.4,
+    // opacity: 0.4,
     elevation: 4,
     height: 370,
     flexDirection: "row",
@@ -409,10 +383,26 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 50,
   },
-
+  // backgroundimageredeemed: {
+  //   width: "100%",
+  //   height: "100%",
+  //   borderRadius: 50,
+  // },
   BoosterPassHeader: {
     flexDirection: "column",
     padding: 0,
+
+    // shadowOffset: {
+    //   height: 1,
+    //   width: 1,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 1,
+  },
+  BoosterPassHeaderRedeemed: {
+    flexDirection: "column",
+    padding: 0,
+    opacity: 0.3,
 
     // shadowOffset: {
     //   height: 1,
@@ -425,6 +415,18 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "500",
     textAlign: "center",
+    shadowOffset: {
+      height: 0.5,
+      width: 0.5,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+  },
+  BoosterPassHeaderText1Redeemed: {
+    fontSize: 27,
+    fontWeight: "500",
+    textAlign: "center",
+    opacity: 1.3,
     shadowOffset: {
       height: 0.5,
       width: 0.5,
@@ -468,6 +470,13 @@ const styles = StyleSheet.create({
     padding: 0,
     alignContent: "center",
   },
+  BoosterPassSLContainerRedeemed: {
+    flexDirection: "row",
+    backgroundColor: "white",
+    padding: 0,
+    alignContent: "center",
+    opacity: 0.3,
+  },
   BoosterPassTextIconsContainer: {
     flexDirection: "column",
     backgroundColor: "white",
@@ -500,6 +509,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 125,
     padding: 0,
+  },
+  BoosterPassFooterContainerRedeemed: {
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: 125,
+    padding: 0,
+    opacity: 0.3,
   },
   BoosterPassFooterText: {
     fontSize: 20,

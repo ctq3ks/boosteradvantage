@@ -29,6 +29,15 @@
       "favicon": "./assets/favicon.png"
     },
     "description": "This will be the member app for the SL booster club.",
-    "githubUrl": "https://github.com/ctq3ks/boosteradvantage"
+    "githubUrl": "https://github.com/ctq3ks/boosteradvantage",
+    "plugins": [
+      [
+        "@stripe/stripe-react-native",
+        {
+
+          "enableGooglePay": true
+        }
+      ]
+    ]
   }
 }

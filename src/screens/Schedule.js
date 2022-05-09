@@ -27,156 +27,215 @@ import { AmplifyS3Image, IconBluetooth } from "@aws-amplify/ui-react";
 import { Business, Coupon } from "../models";
 import { Storage } from "@aws-amplify/storage";
 import { faBlackboard } from "@fortawesome/free-solid-svg-icons";
+// Some component file
+import images from "../components/schoolLogos.js";
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
 //     .then(result => console.log(result))
 //     .catch(err => console.log(err));
 
-const dates = ["04/12/22", "04/13/22", "04/14/22"];
-
 const games1 = [
   {
-    title: "Tuesday, April 12",
+    title: "Thursday, April 28",
     data: [
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
-        HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
-      },
-      {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
+        Sport: "Girls Varsity Tennis",
+        Teams: "Westfield",
         Location: "South Lakes High School",
         HomeOrAway: "Home",
         Time: "4:00 pm",
-        Date: "04/12/22",
       },
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
+        Sport: "Boys Varsity Tennis",
+        Teams: "Westfield",
+        Location: "Westfield High School",
         HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
+        Time: "4:00 pm",
       },
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
+        Sport: "Girls Varsity Lacrosse",
+        Teams: "Madison",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "5:30 pm",
+      },
+      {
+        Sport: "Boys JV Lacrosse",
+        Teams: "Madison",
+        Location: "Nottoway Park",
+        HomeOrAway: "Home",
+        Time: "5:45 pm",
+      },
+      {
+        Sport: "Girls Varsity Softball",
+        Teams: "Madison",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls JV Softball",
+        Teams: "Madison",
+        Location: "Madison High School",
         HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls JV Lacrosse",
+        Teams: "Madison",
+        Location: "Nottoway Park",
+        HomeOrAway: "Away",
+        Time: "7:30 pm",
+      },
+      {
+        Sport: "Boys Varsity Lacrosse",
+        Teams: "Madison",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "7:30 pm",
       },
     ],
   },
   {
-    title: "Wednesday, April 13",
+    title: "Friday, April 29",
     data: [
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
-        HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
-      },
-      {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
+        Sport: "Boys Varsity Tennis",
+        Teams: "Chantilly",
         Location: "South Lakes High School",
         HomeOrAway: "Home",
         Time: "4:00 pm",
-        Date: "04/12/22",
+      },
+      {
+        Sport: "Girls JV Soccer",
+        Teams: "Oakton",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "5:45 pm",
+      },
+      {
+        Sport: "Boys JV Soccer",
+        Teams: "Oakton",
+        Location: "Oakton High School",
+        HomeOrAway: "Away",
+        Time: "5:45 pm",
+      },
+      {
+        Sport: "Boys Varsity Baseball",
+        Teams: "Chantilly",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Boys JV Baseball",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
+        HomeOrAway: "Away",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls Varsity Softball",
+        Teams: "Chantilly",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls JV Baseball",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
+        HomeOrAway: "Away",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls Varsity Soccer",
+        Teams: "Oakton",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "7:15 pm",
+      },
+      {
+        Sport: "Boys Varsity Soccer",
+        Teams: "Oakton",
+        Location: "Oakton High School",
+        HomeOrAway: "Away",
+        Time: "7:15 pm",
       },
     ],
   },
   {
-    title: "Thursday, April 14",
+    title: "Saturday, April 30",
     data: [
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
+        Sport: "Girls Varsity Track",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
         HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
+        Time: "9:00 am",
       },
       {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
-        Location: "South Lakes High School",
-        HomeOrAway: "Home",
-        Time: "4:00 pm",
-        Date: "04/12/22",
+        Sport: "Boys Varsity Track",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
+        HomeOrAway: "Away",
+        Time: "9:00 am",
       },
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
+        Sport: "Girls Varsity Softball",
+        Teams: "Yorktown",
+        Location: "Yorktown High School",
         HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
+        Time: "11:00 am",
+        Status: "Cancelled",
       },
     ],
   },
   {
-    title: "Friday, April 15",
-    data: [
-      {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
-        HomeOrAway: "Away",
-        Time: "6:00 pm",
-        Date: "04/12/22",
-      },
-      {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
-        Location: "South Lakes High School",
-        HomeOrAway: "Home",
-        Time: "4:00 pm",
-        Date: "04/12/22",
-      },
-      {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
-        Location: "South Lakes High School",
-        HomeOrAway: "Home",
-        Time: "4:00 pm",
-        Date: "04/12/22",
-      },
-      {
-        Sport: "Boys JV Baseball",
-        Teams: "Madison",
-        Location: "South Lakes High School",
-        HomeOrAway: "Home",
-        Time: "4:00 pm",
-        Date: "04/12/22",
-      },
-    ],
+    title: "Sunday, May 1",
+    data: [],
   },
   {
-    title: "Saturday, April 16",
+    title: "Monday, May 2",
+    data: [],
+  },
+  {
+    title: "Tuesday, May 3",
     data: [
       {
-        Sport: "Boys Varsity Soccer",
-        Teams: "McLean",
-        Location: "McLean High School",
+        Sport: "Girls JV Soccer",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
+        HomeOrAway: "Away",
+        Time: "5:45 pm",
+      },
+      {
+        Sport: "Boys JV Soccer",
+        Teams: "Chantilly",
+        Location: "South Lakes High School",
         HomeOrAway: "Home",
-        Time: "6:00 pm",
-        Date: "04/12/22",
+        Time: "5:45 pm",
       },
       {
         Sport: "Boys JV Baseball",
         Teams: "Madison",
         Location: "South Lakes High School",
         HomeOrAway: "Home",
-        Time: "4:00 pm",
-        Date: "04/12/22",
+        Time: "6:30 pm",
+      },
+      {
+        Sport: "Girls Varsity Soccer",
+        Teams: "Chantilly",
+        Location: "Chantilly High School",
+        HomeOrAway: "Away",
+        Time: "7:15 pm",
+      },
+      {
+        Sport: "Boys Varsity Soccer",
+        Teams: "Chantilly",
+        Location: "South Lakes High School",
+        HomeOrAway: "Home",
+        Time: "7:15 pm",
       },
     ],
   },
@@ -189,6 +248,33 @@ const Header = () => (
 );
 
 const ListofGames = () => {
+  const teamLogoUrl = (team) => {
+    switch (team) {
+      case "Chantilly":
+        return images.Chantilly;
+        break;
+
+      case "Madison":
+        return images.Madison;
+        break;
+
+      case "Oakton":
+        return images.Oakton;
+        break;
+
+      case "Westfield":
+        return images.Westfield;
+        break;
+
+      case "Yorktown":
+        return images.Yorktown;
+        break;
+
+      case "Herndon":
+        return images.Herndon;
+        break;
+    }
+  };
   const dateview = (item) => {
     return (
       <View style={styles.ScheduleDates}>
@@ -197,12 +283,26 @@ const ListofGames = () => {
     );
   };
   const gameview = (item) => {
+    // console.log(item.Teams)
+    const opposingSchool = teamLogoUrl(item.Teams);
+    const homeSchool = require("../../assets/southlakes.png");
+    var isHome = true;
+    if (item.HomeOrAway == "Home") {
+      isHome = true;
+    } else {
+      isHome = false;
+    }
     return (
       <View style={styles.GameContainer}>
-        <Image
-          style={styles.HomeLogo}
-          source={require("../../assets/southlakes.png")}
-        />
+        <View style={styles.GameHomeContainer}>
+          <Image
+            style={styles.HomeLogo}
+            source={isHome ? homeSchool : opposingSchool}
+          />
+          <Text style={styles.HomeAwayText}>
+          {isHome ? "South Lakes" : item.Teams}
+          </Text>
+        </View>
         <View style={styles.GameContainerInfo}>
           <Text style={styles.GameContainerGameText}>
             {item.Sport} ({item.HomeOrAway})
@@ -212,21 +312,26 @@ const ListofGames = () => {
           </Text>
           <Text style={styles.GameContainerTimeText}>{item.Time}</Text>
         </View>
-        <Image
-          style={styles.AwayLogo}
-          source={require("../../assets/herndon.png")}
-        />
+        <View style={styles.GameAwayContainer}>
+          <Image
+            style={styles.AwayLogo}
+            source={isHome ? opposingSchool : homeSchool}
+          />
+          <Text style={styles.HomeAwayText}>
+          {isHome ? item.Teams : "South Lakes"}
+          </Text>
+        </View>
       </View>
     );
   };
-
+  // " + item.Teams + "
   return (
     <SafeAreaView>
       <SectionList
-        contentContainerStyle={{ paddingBottom: 55 }}
+        contentContainerStyle={{ paddingBottom: 50 }}
         sections={games1}
         keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => gameview(item)}
+        renderItem={({ item }) => gameview(item)} //{({ item }) => gameview(item)}
         renderSectionHeader={({ section }) => dateview(section.title)}
       />
     </SafeAreaView>
@@ -292,7 +397,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#2E5DB5",
-    fontSize: 27,
+    fontSize: 22,
     fontWeight: "500",
     paddingVertical: 6,
     textAlign: "center",
@@ -312,8 +417,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   ScheduleDates: {
-    backgroundColor: "#fff",
+    backgroundColor: "#2E5DB5",
     flexDirection: "row",
+    opacity: 0.95,
     // marginHorizontal: 12,
     // marginVertical: 8,
     // borderBottomColor: "gray",
@@ -329,6 +435,7 @@ const styles = StyleSheet.create({
   ScheduleDatesText: {
     fontSize: 18,
     fontWeight: "400",
+    color: "white",
     alignSelf: "center",
     justifyContent: "center",
   },
@@ -353,7 +460,7 @@ const styles = StyleSheet.create({
   },
   GameContainerInfo: {
     fontSize: 16,
-    flex: 4,
+    flex: 6,
     alignSelf: "center",
     justifyContent: "center",
   },
@@ -363,7 +470,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     marginTop: 3,
-    marginBottom: 4,
+    marginBottom: 2,
   },
   GameContainerLocationText: {
     fontSize: 16,
@@ -377,123 +484,29 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
   },
-  HomeLogo: {
+  GameHomeContainer: {
+    justifyContent: "center",
+    flexDirection: "column",
+    alignContent: "space-between",
     flex: 1,
-    width: 45,
-    height: 55,
+  },
+  GameAwayContainer: {
+    justifyContent: "center",
+    flex: 1,
+  },
+  HomeLogo: {
+    width: 50,
+    height: 45,
   },
   AwayLogo: {
-    flex: 1,
-    width: 45,
-    height: 55,
+    width: 50,
+    height: 45,
   },
-
-  TopSectionBusinessContainer: {
-    flexDirection: "row",
-    padding: 8,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-  },
-  TopSectionBusinessContainerText: {
-    padding: 12,
-  },
-  CouponsContainer: {
-    // flexDirection: "column",
-    // flex: 1,
-    // flexDirection: "column",
-    // backgroundColor: "blue",
-  },
-  CouponItemContainer: {
-    // flex: 1,
-    flexDirection: "row",
-    borderTopColor: "black",
-    borderTopWidth: 1,
-    // flexDirection: 'column',
-    // alignContent: 'center',
-    // backgroundColor: "red",
-    flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    justifyContent: "space-between",
-  },
-  CouponItemContainerDescription: {
-    flex: 4,
-    margin: 15,
-    // backgroundColor: "blue",
-  },
-  CouponItemContainerExpiration: {
-    flex: 1,
-    // backgroundColor: "blue",
-    margin: 5,
+  HomeAwayText: {
+    fontSize: 10,
+    fontWeight: "300",
+    alignSelf: "center",
     justifyContent: "center",
-  },
-  BusinessHeadingText: {
-    fontSize: 24,
-    fontWeight: "600",
-    alignSelf: "center",
-  },
-  BusinessLocationText: {
-    fontSize: 15,
-    fontWeight: "600",
-  },
-  BusinessLogo: {
-    // marginHorizontal: 6,
-    // marginVertical: 6,
-    width: 70,
-    height: 70,
-  },
-  categoryText: {
-    color: "#2E5DB5",
-    fontWeight: "800",
-    alignSelf: "center",
-  },
-  categoryTextPressed: {
-    color: "#fff",
-    fontWeight: "800",
-    alignSelf: "center",
-  },
-  categoryContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    opacity: 1,
-    flex: 0.3,
-    borderWidth: 2,
-    borderColor: "#2E5DB5",
-    paddingTop: 10,
-    paddingBottom: 10,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  categoryContainerPressed: {
-    backgroundColor: "#2E5DB5",
-    borderRadius: 50,
-    flex: 0.3,
-    borderWidth: 2,
-    borderColor: "#2E5DB5",
-    paddingTop: 10,
-    paddingBottom: 10,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 5,
-  },
-
-  categoriesContainer: {
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    // justifyContent: 'center',
-    paddingVertical: 7,
   },
 });
 

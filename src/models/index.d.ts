@@ -7,7 +7,7 @@ export enum CouponType {
 
 export enum BusinessCategory {
   RESTAURANT = "RESTAURANT",
-  SALON = "SALON",
+  WELLNESS = "WELLNESS",
   SERVICE = "SERVICE"
 }
 
@@ -61,6 +61,7 @@ export declare class Coupon {
   readonly currentPrice?: number | null;
   readonly discountPrice?: number | null;
   readonly itemDescription: string;
+  readonly expirationDate?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Coupon, CouponMetaData>);

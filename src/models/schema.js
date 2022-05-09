@@ -245,6 +245,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "expirationDate": {
+                    "name": "expirationDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -400,11 +407,11 @@ export const schema = {
             "name": "BusinessCategory",
             "values": [
                 "RESTAURANT",
-                "SALON",
+                "WELLNESS",
                 "SERVICE"
             ]
         }
     },
     "nonModels": {},
-    "version": "c37b3561f689aa0cfd4718f2b977bd59"
+    "version": "8c56cdc41e8bf07809bdece5a8394629"
 };

@@ -9,7 +9,7 @@ const CouponType = {
 
 const BusinessCategory = {
   "RESTAURANT": "RESTAURANT",
-  "SALON": "SALON",
+  "WELLNESS": "WELLNESS",
   "SERVICE": "SERVICE"
 };
 

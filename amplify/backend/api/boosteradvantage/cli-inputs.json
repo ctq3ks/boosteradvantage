@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "boosteradvantage",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-a56a07d0-fdf1-4e65-bb23-174c4bcbeaa4/amplify/backend/api/boosteradvantage/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-bb89d977-4a84-4767-a724-41a3bc97bda7/amplify/backend/api/boosteradvantage/schema.graphql",
     "defaultAuthType": {
       "mode": "AWS_IAM"
     },
