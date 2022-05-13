@@ -11,7 +11,10 @@ export enum BusinessCategory {
   SERVICE = "SERVICE"
 }
 
-
+export declare class PaymentIntent {
+  readonly clientSecret: string;
+  constructor(init: ModelInit<PaymentIntent>);
+}
 
 type BoosterPassMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';

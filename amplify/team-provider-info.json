@@ -15,6 +15,12 @@
       "auth": {
         "boosteradvantage3a939e18": {},
         "boosteradvantage": {}
+      },
+      "function": {
+        "CreatePaymentIntent": {
+          "deploymentBucketName": "amplify-boosteradvantage-dev-72820-deployment",
+          "s3Key": "amplify-builds/CreatePaymentIntent-38487746335470644450-build.zip"
+        }
       }
     }
   }

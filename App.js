@@ -22,7 +22,8 @@ import Icon from "@expo/vector-icons/Ionicons";
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 import BusinessHome from "./src/screens/BusinessHome";
-import BoosterPass from "./src/screens/Admission";
+import Admission from "./src/screens/Admission";
+import AdmissionModalScreen from "./src/screens/AdmissionModalScreen";
 import Schedule from "./src/screens/Schedule";
 import Fundraiser from "./src/screens/Fundraiser";
 import FundraiserModalScreen from "./src/screens/FundraiserModalScreen";
@@ -49,16 +50,36 @@ function FundraiserStackScreen() {
     <FundraiserStack.Navigator>
       <FundraiserStack.Screen
         options={{ headerShown: false }}
-        name="Home"
+        name="Fundraiser"
         component={Fundraiser}
       />
       <FundraiserStack.Screen
         options={{ headerShown: false }}
         screenOptions={{ presentation: "modal" }}
-        name="modal"
+        name="fundraiserModal"
         component={FundraiserModalScreen}
       />
     </FundraiserStack.Navigator>
+  );
+}
+
+const AdmissionStack = createNativeStackNavigator();
+
+function AdmissionStackScreen() {
+  return (
+    <AdmissionStack.Navigator>
+      <AdmissionStack.Screen
+        options={{ headerShown: false }}
+        name="AdmissionHome"
+        component={Admission}
+      />
+      <AdmissionStack.Screen
+        options={{ headerShown: false }}
+        screenOptions={{ presentation: "modal" }}
+        name="admissionModal"
+        component={AdmissionModalScreen}
+      />
+    </AdmissionStack.Navigator>
   );
 }
 
@@ -117,7 +138,7 @@ const App = () => {
               <Tab.Screen
                 name="Admission"
                 options={{ headerShown: false }}
-                component={BoosterPass}
+                component={AdmissionStackScreen}
               />
             </Tab.Group>
             {/* <Tab.Group>

@@ -6,6 +6,8 @@ export const getBoosterPass = /* GraphQL */ `
     getBoosterPass(id: $id) {
       id
       isUsed
+      userID
+      type
       createdAt
       updatedAt
       _version
@@ -24,6 +26,8 @@ export const listBoosterPasses = /* GraphQL */ `
       items {
         id
         isUsed
+        userID
+        type
         createdAt
         updatedAt
         _version
@@ -51,6 +55,8 @@ export const syncBoosterPasses = /* GraphQL */ `
       items {
         id
         isUsed
+        userID
+        type
         createdAt
         updatedAt
         _version
@@ -88,6 +94,7 @@ export const getUser = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -99,20 +106,25 @@ export const getUser = /* GraphQL */ `
         startedAt
       }
       BoosterPass {
-        id
-        isUsed
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        items {
+          id
+          isUsed
+          userID
+          type
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      userBoosterPassId
     }
   }
 `;
@@ -136,6 +148,7 @@ export const listUsers = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -147,20 +160,25 @@ export const listUsers = /* GraphQL */ `
           startedAt
         }
         BoosterPass {
-          id
-          isUsed
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+          items {
+            id
+            isUsed
+            userID
+            type
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        userBoosterPassId
       }
       nextToken
       startedAt
@@ -193,6 +211,7 @@ export const syncUsers = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -204,20 +223,25 @@ export const syncUsers = /* GraphQL */ `
           startedAt
         }
         BoosterPass {
-          id
-          isUsed
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+          items {
+            id
+            isUsed
+            userID
+            type
+            createdAt
+            updatedAt
+            _version
+            _deleted
+            _lastChangedAt
+          }
+          nextToken
+          startedAt
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        userBoosterPassId
       }
       nextToken
       startedAt
@@ -249,6 +273,7 @@ export const getBusiness = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -287,6 +312,7 @@ export const listBusinesses = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -334,6 +360,7 @@ export const syncBusinesses = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -372,6 +399,7 @@ export const getCoupon = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -394,6 +422,7 @@ export const getCoupon = /* GraphQL */ `
       currentPrice
       discountPrice
       itemDescription
+      expirationDate
       createdAt
       updatedAt
       _version
@@ -432,6 +461,7 @@ export const listCoupons = /* GraphQL */ `
         currentPrice
         discountPrice
         itemDescription
+        expirationDate
         createdAt
         updatedAt
         _version
@@ -479,6 +509,7 @@ export const syncCoupons = /* GraphQL */ `
         currentPrice
         discountPrice
         itemDescription
+        expirationDate
         createdAt
         updatedAt
         _version

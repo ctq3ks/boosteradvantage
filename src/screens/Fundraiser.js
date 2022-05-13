@@ -74,7 +74,7 @@ const FundraiserList = ({ nav }) => {
           return (
             <TouchableWithoutFeedback
               key={item.Description}
-              onPress={() => nav.navigate("modal", { fundraiser: item })}
+              onPress={() => nav.navigate("fundraiserModal", { fundraiser: item })}
             >
               <View style={styles.FundraiserContainer}>
                 <View style={styles.FundraiserImageContainer}>

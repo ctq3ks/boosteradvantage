@@ -13,7 +13,7 @@ const BusinessCategory = {
   "SERVICE": "SERVICE"
 };
 
-const { BoosterPass, User, Coupon, Business } = initSchema(schema);
+const { BoosterPass, User, Coupon, Business, PaymentIntent } = initSchema(schema);
 
 export {
   BoosterPass,
@@ -21,5 +21,6 @@ export {
   Coupon,
   Business,
   CouponType,
-  BusinessCategory
+  BusinessCategory,
+  PaymentIntent
 };

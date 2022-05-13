@@ -6,6 +6,8 @@ export const onCreateBoosterPass = /* GraphQL */ `
     onCreateBoosterPass {
       id
       isUsed
+      userID
+      type
       createdAt
       updatedAt
       _version
@@ -19,6 +21,8 @@ export const onUpdateBoosterPass = /* GraphQL */ `
     onUpdateBoosterPass {
       id
       isUsed
+      userID
+      type
       createdAt
       updatedAt
       _version
@@ -32,6 +36,8 @@ export const onDeleteBoosterPass = /* GraphQL */ `
     onDeleteBoosterPass {
       id
       isUsed
+      userID
+      type
       createdAt
       updatedAt
       _version
@@ -66,6 +72,7 @@ export const onCreateUser = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -77,20 +84,25 @@ export const onCreateUser = /* GraphQL */ `
         startedAt
       }
       BoosterPass {
-        id
-        isUsed
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        items {
+          id
+          isUsed
+          userID
+          type
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      userBoosterPassId
     }
   }
 `;
@@ -120,6 +132,7 @@ export const onUpdateUser = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -131,20 +144,25 @@ export const onUpdateUser = /* GraphQL */ `
         startedAt
       }
       BoosterPass {
-        id
-        isUsed
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        items {
+          id
+          isUsed
+          userID
+          type
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      userBoosterPassId
     }
   }
 `;
@@ -174,6 +192,7 @@ export const onDeleteUser = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -185,20 +204,25 @@ export const onDeleteUser = /* GraphQL */ `
         startedAt
       }
       BoosterPass {
-        id
-        isUsed
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        items {
+          id
+          isUsed
+          userID
+          type
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      userBoosterPassId
     }
   }
 `;
@@ -227,6 +251,7 @@ export const onCreateBusiness = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -271,6 +296,7 @@ export const onUpdateBusiness = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -315,6 +341,7 @@ export const onDeleteBusiness = /* GraphQL */ `
           currentPrice
           discountPrice
           itemDescription
+          expirationDate
           createdAt
           updatedAt
           _version
@@ -350,6 +377,7 @@ export const onCreateCoupon = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -372,6 +400,7 @@ export const onCreateCoupon = /* GraphQL */ `
       currentPrice
       discountPrice
       itemDescription
+      expirationDate
       createdAt
       updatedAt
       _version
@@ -397,6 +426,7 @@ export const onUpdateCoupon = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -419,6 +449,7 @@ export const onUpdateCoupon = /* GraphQL */ `
       currentPrice
       discountPrice
       itemDescription
+      expirationDate
       createdAt
       updatedAt
       _version
@@ -444,6 +475,7 @@ export const onDeleteCoupon = /* GraphQL */ `
             currentPrice
             discountPrice
             itemDescription
+            expirationDate
             createdAt
             updatedAt
             _version
@@ -466,6 +498,7 @@ export const onDeleteCoupon = /* GraphQL */ `
       currentPrice
       discountPrice
       itemDescription
+      expirationDate
       createdAt
       updatedAt
       _version

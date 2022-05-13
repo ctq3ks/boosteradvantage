@@ -1,3 +1,12 @@
+type Mutation {
+  createPaymentIntent(amount: Int!): PaymentIntent!
+    @function(name: "CreatePaymentIntent-${env}")
+}
+
+type PaymentIntent {
+  clientSecret: String!
+}
+
 enum CouponType {
   PRICE
   ITEM
@@ -9,14 +18,14 @@ enum BusinessCategory {
   SERVICE
 }
 
-type BoosterPass @model @auth(rules: [{allow: private, provider: iam}]) {
+type BoosterPass @model @auth(rules: [{ allow: private, provider: iam }]) {
   id: ID!
   isUsed: Boolean!
   userID: ID! @index(name: "byUser")
   type: String
 }
 
-type User @model @auth(rules: [{allow: private, provider: iam}]) {
+type User @model @auth(rules: [{ allow: private, provider: iam }]) {
   id: ID!
   email: AWSEmail
   phonenumber: AWSPhone
@@ -25,7 +34,7 @@ type User @model @auth(rules: [{allow: private, provider: iam}]) {
   BoosterPass: [BoosterPass] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
-type Business @model @auth(rules: [{allow: private, provider: iam}]) {
+type Business @model @auth(rules: [{ allow: private, provider: iam }]) {
   id: ID!
   name: String!
   location: String!
@@ -33,7 +42,7 @@ type Business @model @auth(rules: [{allow: private, provider: iam}]) {
   category: BusinessCategory!
 }
 
-type Coupon @model @auth(rules: [{allow: private, provider: iam}]) {
+type Coupon @model @auth(rules: [{ allow: private, provider: iam }]) {
   id: ID!
   business: Business! @belongsTo
   userID: ID @index(name: "byUser")
@@ -43,4 +52,3 @@ type Coupon @model @auth(rules: [{allow: private, provider: iam}]) {
   itemDescription: String!
   expirationDate: AWSDate
 }
- 

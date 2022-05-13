@@ -30,6 +30,7 @@ import { S3Image } from "aws-amplify-react-native";
 import { AmplifyS3Image, IconBluetooth } from "@aws-amplify/ui-react";
 import { Business, Coupon, BoosterPass } from "../models";
 import { Storage } from "@aws-amplify/storage";
+import { faBlackboard } from "@fortawesome/free-solid-svg-icons";
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
 //     .then(result => console.log(result))
@@ -41,7 +42,7 @@ const Header = () => (
   </View>
 );
 
-const FilterBoosterPassModalswithList = () => {
+const FilterBoosterPassModalswithList = ({ nav }) => {
   // const [restaurant, setRestaurant] = useState(true);
   // const [salon, setSalon] = useState(true);
   // const [services, setServices] = useState(true);
@@ -210,7 +211,10 @@ const FilterBoosterPassModalswithList = () => {
       //   style={ styles.BoosterPassesContainer }
       // >
       // {/* <View style={ styles.BoosterPassesContainerScroll }> */}
-      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+      <ScrollView
+        style={styles.BoosterPassesContainerScroll}
+        contentContainerStyle={{ paddingBottom: 25 }}
+      >
         <View
           //onPress={() => setIsRedeemBoosterVisible(true)}
           // onLongPress={() => setIsRedeemBoosterVisible(!isRedeemBoosterVisible)}
@@ -252,19 +256,24 @@ const FilterBoosterPassModalswithList = () => {
       </ScrollView>
     );
   };
-
+  // onPress={() => nav.navigate("admissionModal")
   return (
     <View>
       <BoosterPasses />
+      <View style={styles.PurchaseContainer}>
+        <Pressable style={styles.PurchaseButton} onPress={() => nav.navigate("admissionModal")}>
+          <Text style={styles.PurchaseText}>Purchase Passes</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
 
-const Admission = () => {
+const Admission = ({ navigation }) => {
   return (
     <>
       <Header />
-      <FilterBoosterPassModalswithList />
+      <FilterBoosterPassModalswithList nav={navigation} />
       {/* <BoosterPassList /> */}
     </>
   );
@@ -290,10 +299,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   BoosterPassesContainerScroll: {
-    flex: 5,
-    // flexDirection: "column",
-    marginTop: 8,
-    marginHorizontal: 20,
+    // flex: 5,
+    // // flexDirection: "column",
+    // marginTop: 8,
+    // marginHorizontal: 20,
+    // backgroundColor: "black",
   },
   BoosterPassesContainer: {
     flex: 1,
@@ -546,6 +556,28 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.6,
     shadowRadius: 5,
+  },
+  PurchaseContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    // marginTop: 125,
+    padding: 0,
+  },
+  PurchaseButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 14,
+    width: 190,
+    borderRadius: 50,
+    elevation: 3,
+    backgroundColor: "#F2A842",
+  },
+  PurchaseText: {
+    fontSize: 19,
+    lineHeight: 21,
+    fontWeight: "500",
+    letterSpacing: 0.25,
+    color: "white",
   },
 });
 
