@@ -3,11 +3,18 @@
   "serviceConfiguration": {
     "apiName": "boosteradvantage",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-bb89d977-4a84-4767-a724-41a3bc97bda7/amplify/backend/api/boosteradvantage/schema.graphql",
+    "gqlSchemaPath": "/Users/conorquinn-irons/Desktop/BoosterAdvantage/boosteradvantage/amplify/backend/api/boosteradvantage/schema.graphql",
     "defaultAuthType": {
       "mode": "AWS_IAM"
     },
-    "additionalAuthTypes": [],
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 80,
+        "apiKeyExpirationDate": "2022-08-02T00:02:13.001Z",
+        "keyDescription": "AKIAXTWQJ4XSSPCKDJEW"
+      }
+    ],
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"

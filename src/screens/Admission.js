@@ -17,7 +17,7 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
 } from "react-native";
-import { API, withSSRContext } from "aws-amplify";
+import { Amplify, API, Auth, graphqlOperation } from "aws-amplify";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   createBoosterPass,
@@ -256,7 +256,7 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
       </ScrollView>
     );
   };
-  // onPress={() => nav.navigate("admissionModal")
+  // onPress={() => nav.navigate("admissionModal") Auth. signOut()
   return (
     <View>
       <BoosterPasses />

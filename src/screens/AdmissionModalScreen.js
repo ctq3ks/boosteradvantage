@@ -27,7 +27,7 @@ import { createPaymentIntent } from "../graphql/mutations";
 import Icon from "@expo/vector-icons/Ionicons";
 import { reloadAsync } from "expo-updates";
 import { IconBluetooth } from "@aws-amplify/ui-react";
-import { initPaymentSheet, useStripe } from "@stripe/stripe-react-native";
+import { useStripe } from "@stripe/stripe-react-native";
 
 // import Icons from '@fortawesome/free-regular-svg-icons';
 // import Icons from 'react-native-vector-icons/FontAwesome5';
@@ -38,7 +38,7 @@ function AdmissionModalScreen({ navigation }) {
   // const { Admission } = route.params;
   const amount = 1000;
   const [clientSecret, setClientSecret] = useState(null); //<String | null> (null);
-  const { initPaymentSheet } = useStripe();
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
   useEffect(() => {
     fetchPaymentIntent();
@@ -59,8 +59,6 @@ function AdmissionModalScreen({ navigation }) {
   };
 
   const initializePaymentSheet = async () => {
-    // const { paymentIntent, ephemeralKey, customer, publishableKey } =
-    //   await fetchPaymentSheetParams();
     if (!clientSecret) {
       return;
     }
@@ -68,16 +66,20 @@ function AdmissionModalScreen({ navigation }) {
       paymentIntentClientSecret: clientSecret,
     });
     console.log("success");
-    // const { error } = await initPaymentSheet({
-    //   customerId: customer,
-    //   customerEphemeralKeySecret: ephemeralKey,
-    //   paymentIntentClientSecret: paymentIntent,
-    //   // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
-    //   //methods that complete payment after a delay, like SEPA Debit and Sofort.
-    //   allowsDelayedPaymentMethods: true,
-    // });
     if (error) {
       Alert.alert(error);
+    }
+  };
+
+  const openPaymentSheet = async () => {
+    if (!clientSecret) {
+      return;
+    }
+    const { error } = await presentPaymentSheet({clientSecret});
+    if (error) {
+      Alert.alert(`Error code: ${error.code}`, error.message);
+    } else {
+      Alert.alert("Success", "Your order is confirmed!");
     }
   };
 
@@ -104,8 +106,9 @@ function AdmissionModalScreen({ navigation }) {
             />
           </View>
           <View style={styles.DescriptionAdmissionContainer}>
+            {/* onPress={Auth.signOut()} */}
             <View style={styles.DonateContainer}>
-              <Pressable style={styles.DonateButton}>
+              <Pressable style={styles.DonateButton} onPress={() => openPaymentSheet()}>
                 <Text style={styles.DonateText}>Donate</Text>
               </Pressable>
             </View>

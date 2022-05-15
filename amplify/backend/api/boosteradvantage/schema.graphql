@@ -1,6 +1,7 @@
 type Mutation {
   createPaymentIntent(amount: Int!): PaymentIntent!
     @function(name: "CreatePaymentIntent-${env}")
+    @auth(rules: [{ allow: private, provider: iam }])
 }
 
 type PaymentIntent {

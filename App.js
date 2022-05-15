@@ -93,7 +93,7 @@ const App = () => {
   // }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <StripeProvider publishableKey="pk_test_51KwtY8JWWO2bb9v1qgcvnINieHpf7aMHZSBjPo3OY">
+      <StripeProvider publishableKey="pk_test_51KwtY8JWWO2bb9v1qgcvnINieHpf7aMHZSBjPo3OYxLbZqSByroxKCju3gGoqYXL5pwNjqWsJZKWojrC47RpTpr800DyX89NH6">
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
