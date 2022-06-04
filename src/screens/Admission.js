@@ -102,11 +102,11 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
         >
           <View style={styles.BoosterPassHeaderRedeemed}>
             <Text style={styles.BoosterPassHeaderText1Redeemed}>
-              All Sports - {pass.type}
+              {pass.type}
             </Text>
-            <Text style={styles.BoosterPassHeaderText2}>
+            {/* <Text style={styles.BoosterPassHeaderText2}>
               Spring Season Pass
-            </Text>
+            </Text> */}
           </View>
           <View style={styles.BoosterPassSLContainerRedeemed}>
             <Image
@@ -157,10 +157,8 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
         style={styles.backgroundimage}
       >
         <View style={styles.BoosterPassHeader}>
-          <Text style={styles.BoosterPassHeaderText1}>
-            All Sports - {pass.type}
-          </Text>
-          <Text style={styles.BoosterPassHeaderText2}>Spring Season Pass</Text>
+          <Text style={styles.BoosterPassHeaderText1}>{pass.type}</Text>
+          {/* <Text style={styles.BoosterPassHeaderText2}>Spring Season Pass</Text> */}
         </View>
         <View style={styles.BoosterPassSLContainer}>
           <Image
@@ -213,7 +211,7 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
       // {/* <View style={ styles.BoosterPassesContainerScroll }> */}
       <ScrollView
         style={styles.BoosterPassesContainerScroll}
-        contentContainerStyle={{ paddingBottom: 25 }}
+        contentContainerStyle={{ paddingBottom: 50 }}
       >
         <View
           //onPress={() => setIsRedeemBoosterVisible(true)}
@@ -261,7 +259,10 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
     <View>
       <BoosterPasses />
       <View style={styles.PurchaseContainer}>
-        <Pressable style={styles.PurchaseButton} onPress={() => nav.navigate("admissionModal")}>
+        <Pressable
+          style={styles.PurchaseButton}
+          onPress={() => nav.navigate("Booster Passes")}
+        >
           <Text style={styles.PurchaseText}>Purchase Passes</Text>
         </Pressable>
       </View>
@@ -333,7 +334,7 @@ const styles = StyleSheet.create({
     height: 370,
     flexDirection: "row",
     flexWrap: "wrap",
-    marginBottom: -344,
+    marginBottom: -336,
 
     marginHorizontal: 12,
     marginVertical: 8,
@@ -401,7 +402,8 @@ const styles = StyleSheet.create({
   BoosterPassHeader: {
     flexDirection: "column",
     padding: 0,
-
+    marginTop: 10,
+    marginBottom: 14,
     // shadowOffset: {
     //   height: 1,
     //   width: 1,
@@ -413,6 +415,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 0,
     opacity: 0.3,
+    marginTop: 10,
+    marginBottom: 14,
 
     // shadowOffset: {
     //   height: 1,
@@ -422,7 +426,7 @@ const styles = StyleSheet.create({
     // shadowRadius: 1,
   },
   BoosterPassHeaderText1: {
-    fontSize: 27,
+    fontSize: 25,
     fontWeight: "500",
     textAlign: "center",
     shadowOffset: {
@@ -433,7 +437,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   BoosterPassHeaderText1Redeemed: {
-    fontSize: 27,
+    fontSize: 25,
     fontWeight: "500",
     textAlign: "center",
     opacity: 1.3,
@@ -567,6 +571,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 14,
+    marginTop: -30,
     width: 190,
     borderRadius: 50,
     elevation: 3,

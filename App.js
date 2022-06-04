@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView, View, Button } from "react-native";
+import { StyleSheet, Text, SafeAreaView, View, Button, TouchableWithoutFeedback, Pressable } from "react-native";
 
 import { Amplify, API, Auth, graphqlOperation } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
@@ -23,7 +23,9 @@ import Icon from "@expo/vector-icons/Ionicons";
 
 import BusinessHome from "./src/screens/BusinessHome";
 import Admission from "./src/screens/Admission";
-import AdmissionModalScreen from "./src/screens/AdmissionModalScreen";
+import AdmissionProductsScreen from "./src/screens/AdmissionProductsScreen";
+import AdmissionShoppingCartScreen from "./src/screens/AdmissionShoppingCartScreen";
+import AdmissionCheckoutScreen from "./src/screens/AdmissionCheckoutScreen";
 import Schedule from "./src/screens/Schedule";
 import Fundraiser from "./src/screens/Fundraiser";
 import FundraiserModalScreen from "./src/screens/FundraiserModalScreen";
@@ -74,10 +76,37 @@ function AdmissionStackScreen() {
         component={Admission}
       />
       <AdmissionStack.Screen
-        options={{ headerShown: false }}
+        // options={({ navigation, route }) => ({
+        //   headerTitle: Admission />,
+        // })}
+          // headerRight: () => ( props => <LogoTitle {...props}
+          //   <Icon
+          //     justifySelf={"center"}
+          //     name={"cart-outline"}
+          //     size={30}
+          //     color={"#2E5DB5"}
+          //     onPress={navigate("Shopping Cart")}
+          //   />
+          // ),]
+        // screenOptions={{ presentation: "modal" }}
+        name="Booster Passes"
+        component={AdmissionProductsScreen}
+      />
+      <AdmissionStack.Screen
+        options={{
+          headerShown: true,
+        }}
+        // screenOptions={{ presentation: "modal" }}
+        name="Shopping Cart"
+        component={AdmissionShoppingCartScreen}
+      />
+      <AdmissionStack.Screen
+        options={{
+          headerShown: true,
+        }}
         screenOptions={{ presentation: "modal" }}
-        name="admissionModal"
-        component={AdmissionModalScreen}
+        name="Check Out"
+        component={AdmissionCheckoutScreen}
       />
     </AdmissionStack.Navigator>
   );
