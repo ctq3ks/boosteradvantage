@@ -21,17 +21,19 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { DataStore, Auth } from "aws-amplify";
-import { Product, CartProduct } from "../models";
+import { Product, CartProduct } from "../../models";
 
-import QuantitySelector from "../components/QuantitySelectorShopping";
-import Button from "../components/Button";
-import ProductItem from "../components/ProductItem";
+import QuantitySelector from "../../components/QuantitySelectorShopping";
+import Button from "../../components/Button";
+import ProductItem from "../../components/ProductItem";
 import Icon from "@expo/vector-icons/Ionicons";
 // import CartProductItem from "../components/ProductItem";
 // import ImageCarousel from '../../components/ImageCarousel';
 
+import styles from './styles';
+
 const AdmissionProductsScreen = ({ navigation }) => {
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
   // const [itemsInCart, setItemsInCart] = useState();
   // const [checkingOut, setCheckingOut] = useState(false);
@@ -276,58 +278,6 @@ const AdmissionProductsScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    padding: 10,
-  },
-  ShoppingCartContainer: {
-    flexDirection: "row",
-    // backgroundColor: "blue",
-    position: "absolute",
-    right: 15,
-    bottom: 10,
-    alignItems: "flex-start",
-    margin: 10,
-    opacity: 0.9,
-  },
-  ShoppingCartButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    // paddingVertical: 14,
-    // marginTop: -20,
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    elevation: 3,
-    backgroundColor: "#2E5DB5", //F19536
-  },
-  ShoppingCartText: {
-    fontSize: 19,
-    lineHeight: 21,
-    fontWeight: "500",
-    letterSpacing: 0.25,
-    color: "white",
-  },
-  ShoppingCartNotification: {
-    paddingVertical: 2,
-    width: 20,
-    borderRadius: 100,
-    // elevation: 3,
-    // marginTop: -40,
-    marginLeft: -20,
-    backgroundColor: "red", //F19536
-  },
-  ShoppingCartNotificationText: {
-    fontSize: 13,
-    // lineHeight: 21,
-    fontWeight: "600",
-    color: "black",
-    alignSelf: "center",
-    color: "white",
-    // marginBottom: -25,
-  },
-});
+
 
 export default AdmissionProductsScreen;

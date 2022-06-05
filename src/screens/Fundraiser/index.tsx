@@ -24,16 +24,17 @@ import {
   createBoosterPass,
   updateBoosterPass,
   deleteBoosterPass,
-} from "../graphql/mutations";
+} from "../../graphql/mutations";
 import { DataStore } from "@aws-amplify/datastore";
-import * as queries from "../graphql/queries";
+import * as queries from "../../graphql/queries";
 import { S3Image } from "aws-amplify-react-native";
-import { AmplifyS3Image, IconBluetooth } from "@aws-amplify/ui-react";
-import { Business, Coupon, BoosterPass } from "../models";
+import { Business, Coupon, BoosterPass } from "../../models";
 import { Storage } from "@aws-amplify/storage";
 import * as Progress from "react-native-progress";
 import { reloadAsync } from "expo-updates";
-import compLogos from "../components/compLogos.js";
+import compLogos from "../../components/compLogos.js";
+
+import styles from './styles';
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
 //     .then(result => console.log(result))
@@ -47,8 +48,8 @@ const fundraisers = [
     About: "Dev Technology provides IT solutions to meet the mission-critical needs of government by exceeding our clients’ expectations through partnership, a commitment to team work, collaboration, and valuing our employees.",
     Promotion:
       "Dev Technology Group will match 25% of fundraised amount up to $250.",
-    GoalAmount: "1000",
-    CurrentAmount: "479",
+    GoalAmount: 1000,
+    CurrentAmount: 479,
     Donations: "10",
     Date: "May 1, 2022",
   }
@@ -80,7 +81,7 @@ const FundraiserList = ({ nav }) => {
                 <View style={styles.FundraiserImageContainer}>
                   <Image
                     style={styles.FundraiserHeaderImage}
-                    source={require("../../assets/slbaseballteam.jpeg")}
+                    source={require("../../../assets/slbaseballteam.jpeg")}
                   />
                 </View>
                 <View style={styles.DescriptionFundraiserContainer}>
@@ -91,7 +92,7 @@ const FundraiserList = ({ nav }) => {
                     <View style={styles.SponsorFundraiserImageContainer}>
                       <Image
                         style={styles.SponsorImage}
-                        source={require("../../assets/devtechnologygroup.jpeg")}
+                        source={require("../../../assets/devtechnologygroup.jpeg")}
                       />
                     </View>
                     <View style={styles.SponsorFundraiserTextContainer}>
@@ -107,15 +108,14 @@ const FundraiserList = ({ nav }) => {
                     item.GoalAmount +
                     " goal"}
                 </Text> */}
+                <View style={styles.ProgressBar}>
                   <Progress.Bar
                     progress={item.CurrentAmount / item.GoalAmount}
                     width={325}
                     height={10}
                     color={"green"}
                     borderColor={"black"}
-                    alignSelf={"center"}
-                    margin={10}
-                  />
+                  /></View>
                   <Text style={styles.FundraiserFundedText}>
                     {"$" +
                       item.CurrentAmount +
@@ -153,113 +153,5 @@ const Fundraiser = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: "#fff",
-    // opacity: .90,
-    paddingTop: Platform.OS === "ios" ? 8 : 0,
-  },
-  headerTitle: {
-    color: "#2E5DB5", //marginTop: 3,
-    // marginBottom: 4,
-    fontSize: 22,
-    fontWeight: "500",
-    paddingVertical: 6,
-    textAlign: "center",
-    shadowOffset: {
-      height: 0.5,
-      width: 0.5,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-  },
-  scrollviewcontainer: {
-    // flex: 1,
-  },
-  FundraiserContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 2,
-    elevation: 4,
-    flexDirection: "column",
-    // marginHorizontal: 12,
-    marginVertical: 3,
-    padding: 8,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  FundraiserImageContainer: {
-    // flex: 3,
-    padding: 5,
-    // backgroundColor: "red",
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-  },
-  DescriptionFundraiserContainer: {
-    // flex: 1,
-    flexDirection: "column",
-    // backgroundColor: "blue",
-    alignContent: "center",
-    justifyContent: "center",
-    padding: 8,
-  },
-  TopSectionFundraiserContainerText: {
-    padding: 5,
-    alignSelf: "center",
-  },
-
-  FundraiserDescriptionText: {
-    fontSize: 16,
-    fontWeight: "300",
-    margin: 5,
-    // alignSelf: "center",
-  },
-  SponsorFundraiserContainer: {
-    flexDirection: "row",
-    alignContent: "space-between",
-  },
-  SponsorFundraiserImageContainer: {
-    flex: 2,
-    alignSelf: "center",
-    // backgroundColor: "blue",
-  },
-  SponsorImage: {
-    // borderRadius:
-    // borderRadius: 10,
-    width: 55,
-    height: 55,
-    alignSelf: "center",
-  },
-  SponsorFundraiserTextContainer: {
-    flex: 10,
-    // backgroundColor: "red",
-    margin: 4,
-  },
-  SponsorFundraiserText: {
-    alignSelf: "center",
-    fontSize: 15,
-    fontWeight: "300",
-    margin: 4,
-  },
-  FundraiserFundedText: {
-    fontSize: 16,
-    fontWeight: "300",
-    alignSelf: "center",
-  },
-  FundraiserHeaderImage: {
-    // marginHorizontal: 6,
-    // marginVertical: 6,
-    borderRadius: 10,
-    width: "auto",
-    height: 150,
-  },
-});
 
 export default Fundraiser;

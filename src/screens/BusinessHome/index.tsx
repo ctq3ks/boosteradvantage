@@ -17,14 +17,15 @@ import {
   createBusiness,
   updateBusiness,
   deleteBusiness,
-} from "../graphql/mutations";
+} from "../../graphql/mutations";
 import { DataStore } from "@aws-amplify/datastore";
-import * as queries from "../graphql/queries";
+import * as queries from "../../graphql/queries";
 import { S3Image } from "aws-amplify-react-native";
-import { AmplifyS3Image, IconBluetooth } from "@aws-amplify/ui-react";
-import { Business, Coupon } from "../models";
+import { Business, Coupon } from "../../models";
 import { Storage } from "@aws-amplify/storage";
-import images from "../components/compLogos.js";
+import images from "../../components/compLogos.js";
+
+import styles from './styles';
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
 //     .then(result => console.log(result))
@@ -139,46 +140,6 @@ const FilterBusinessModalswithList = () => {
     //     })
     //     .catch(err => console.log(err));
     // };
-    const renderCoupon = ({ coupon }) => (
-      <View style={{ height: 100 }}>
-        <Text style={styles.BusinessHeading}>{coupon.couponType}</Text>
-      </View>
-    );
-
-    const renderBusiness = ({ item }) => (
-      <View style={styles.BusinessContainer}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/chickfila.png")}
-        />
-        <Text>
-          <Text style={styles.BusinessHeading}>{item.name}</Text>
-          {`\n${item.location}`}
-        </Text>
-
-        {/* <FlatList
-          data={item.coupons}
-          // keyExtractor={({ id }) => id}
-          renderItem={( {item2} ) =>
-            <View>
-              <Text>{item2.couponType}</Text>  
-            <View/>
-          }
-        /> */}
-
-        {/* <FlatList
-          data={item.coupons}
-          keyExtractor={({ id }) => id}
-          renderItem={renderCoupon}
-        /> */}
-        {/* { item} */}
-        {/* <ScrollView>
-        data={item.coupons}
-        keyExtractor={({ id }) => id}
-        renderItem={renderCoupons}
-        </ScrollView> */}
-      </View>
-    );
 
     const compLogoUrl = (comp) => {
       switch (comp) {
@@ -330,153 +291,5 @@ const BusinessHome = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  headerContainer: {
-    backgroundColor: "#fff",
-    // opacity: .90,
-    paddingTop: Platform.OS === "ios" ? 8 : 0,
-  },
-  headerTitle: {
-    color: "#2E5DB5", //marginTop: 3,
-    // marginBottom: 4,
-    fontSize: 22,
-    fontWeight: "500",
-    paddingVertical: 6,
-    textAlign: "center",
-    shadowOffset: {
-      height: 0.5,
-      width: 0.5,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-  },
-  scrollviewcontainer: {
-    // flex: 1,
-  },
-  BusinessContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 2,
-    elevation: 4,
-    flexDirection: "column",
-    marginHorizontal: 12,
-    marginVertical: 8,
-    padding: 8,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  TopSectionBusinessContainer: {
-    flexDirection: "row",
-    padding: 8,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-  },
-  TopSectionBusinessContainerText: {
-    padding: 12,
-  },
-  CouponsContainer: {
-    // flexDirection: "column",
-    // flex: 1,
-    // flexDirection: "column",
-    // backgroundColor: "blue",
-  },
-  CouponItemContainer: {
-    // flex: 1,
-    flexDirection: "row",
-    borderTopColor: "black",
-    borderTopWidth: 1,
-    // flexDirection: 'column',
-    // alignContent: 'center',
-    // backgroundColor: "red",
-    flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    justifyContent: "space-between",
-  },
-  CouponItemContainerDescription: {
-    flex: 4,
-    margin: 15,
-    // backgroundColor: "blue",
-  },
-  CouponItemContainerExpiration: {
-    flex: 1,
-    // backgroundColor: "blue",
-    margin: 5,
-    justifyContent: "center",
-  },
-  BusinessHeadingText: {
-    fontSize: 18,
-    fontWeight: "500",
-    alignSelf: "center",
-  },
-  BusinessLocationText: {
-    fontSize: 14,
-    fontWeight: "400",
-  },
-  BusinessLogo: {
-    // marginHorizontal: 6,
-    // marginVertical: 6,
-    borderRadius: 100,
-    width: 70,
-    height: 70,
-  },
-  categoryText: {
-    color: "#2E5DB5",
-    fontWeight: "800",
-    alignSelf: "center",
-  },
-  categoryTextPressed: {
-    color: "#fff",
-    fontWeight: "800",
-    alignSelf: "center",
-  },
-  categoryContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    opacity: 1,
-    flex: 0.3,
-    borderWidth: 2,
-    borderColor: "#2E5DB5",
-    paddingTop: 10,
-    paddingBottom: 10,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-  categoryContainerPressed: {
-    backgroundColor: "#2E5DB5",
-    borderRadius: 50,
-    flex: 0.3,
-    borderWidth: 2,
-    borderColor: "#2E5DB5",
-    paddingTop: 10,
-    paddingBottom: 10,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-    shadowOpacity: 0.6,
-    shadowRadius: 5,
-  },
-
-  categoriesContainer: {
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    // justifyContent: 'center',
-    paddingVertical: 7,
-  },
-});
 
 export default BusinessHome;

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView, View, Button, TouchableWithoutFeedback, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  Button,
+  TouchableWithoutFeedback,
+  Pressable,
+} from "react-native";
 
 import { Amplify, API, Auth, graphqlOperation } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
@@ -28,10 +36,12 @@ import AdmissionShoppingCartScreen from "./src/screens/AdmissionShoppingCartScre
 import AdmissionCheckoutScreen from "./src/screens/AdmissionCheckoutScreen";
 import Schedule from "./src/screens/Schedule";
 import Fundraiser from "./src/screens/Fundraiser";
-import FundraiserModalScreen from "./src/screens/FundraiserModalScreen";
+import FundraiserModalScreen from "./src/screens/FundraiserDonateScreen";
 import PaymentScreen from "./src/screens/PaymentScreen";
 
 import { StripeProvider } from "@stripe/stripe-react-native";
+
+import Router from "./src/router";
 
 import { DataStore } from "@aws-amplify/datastore";
 
@@ -57,7 +67,6 @@ function FundraiserStackScreen() {
       />
       <FundraiserStack.Screen
         options={{ headerShown: false }}
-        screenOptions={{ presentation: "modal" }}
         name="fundraiserModal"
         component={FundraiserModalScreen}
       />
@@ -79,15 +88,15 @@ function AdmissionStackScreen() {
         // options={({ navigation, route }) => ({
         //   headerTitle: Admission />,
         // })}
-          // headerRight: () => ( props => <LogoTitle {...props}
-          //   <Icon
-          //     justifySelf={"center"}
-          //     name={"cart-outline"}
-          //     size={30}
-          //     color={"#2E5DB5"}
-          //     onPress={navigate("Shopping Cart")}
-          //   />
-          // ),]
+        // headerRight: () => ( props => <LogoTitle {...props}
+        //   <Icon
+        //     justifySelf={"center"}
+        //     name={"cart-outline"}
+        //     size={30}
+        //     color={"#2E5DB5"}
+        //     onPress={navigate("Shopping Cart")}
+        //   />
+        // ),]
         // screenOptions={{ presentation: "modal" }}
         name="Booster Passes"
         component={AdmissionProductsScreen}
@@ -123,7 +132,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StripeProvider publishableKey="pk_test_51KwtY8JWWO2bb9v1qgcvnINieHpf7aMHZSBjPo3OYxLbZqSByroxKCju3gGoqYXL5pwNjqWsJZKWojrC47RpTpr800DyX89NH6">
-        <NavigationContainer>
+        <Router />
+        {/* <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
               tabBarIcon: ({ focused, color, size }) => {
@@ -170,15 +180,8 @@ const App = () => {
                 component={AdmissionStackScreen}
               />
             </Tab.Group>
-            {/* <Tab.Group>
-          <Tab.Screen
-              name="modal"
-              options={{ headerShown: false }}
-              component={FundraiserModalScreen}
-            />
-          </Tab.Group> */}
           </Tab.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
       </StripeProvider>
     </SafeAreaView>
   );
