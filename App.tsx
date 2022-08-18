@@ -29,7 +29,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
-import BusinessHome from "./src/screens/BusinessHome";
+import BusinessHome from "./src/screens/CouponHome";
 import Admission from "./src/screens/Admission";
 import AdmissionProductsScreen from "./src/screens/AdmissionProductsScreen";
 import AdmissionShoppingCartScreen from "./src/screens/AdmissionShoppingCartScreen";
@@ -37,7 +37,7 @@ import AdmissionCheckoutScreen from "./src/screens/AdmissionCheckoutScreen";
 import Schedule from "./src/screens/Schedule";
 import Fundraiser from "./src/screens/Fundraiser";
 import FundraiserModalScreen from "./src/screens/FundraiserDonateScreen";
-import PaymentScreen from "./src/screens/PaymentScreen";
+import PaymentScreen from "./src/screens/Misc/PaymentScreen";
 
 import { StripeProvider } from "@stripe/stripe-react-native";
 
@@ -53,73 +53,6 @@ Amplify.configure({
     disabled: true,
   },
 });
-const Tab = createBottomTabNavigator();
-
-const FundraiserStack = createNativeStackNavigator();
-
-function FundraiserStackScreen() {
-  return (
-    <FundraiserStack.Navigator>
-      <FundraiserStack.Screen
-        options={{ headerShown: false }}
-        name="Fundraiser"
-        component={Fundraiser}
-      />
-      <FundraiserStack.Screen
-        options={{ headerShown: false }}
-        name="fundraiserModal"
-        component={FundraiserModalScreen}
-      />
-    </FundraiserStack.Navigator>
-  );
-}
-
-const AdmissionStack = createNativeStackNavigator();
-
-function AdmissionStackScreen() {
-  return (
-    <AdmissionStack.Navigator>
-      <AdmissionStack.Screen
-        options={{ headerShown: false }}
-        name="AdmissionHome"
-        component={Admission}
-      />
-      <AdmissionStack.Screen
-        // options={({ navigation, route }) => ({
-        //   headerTitle: Admission />,
-        // })}
-        // headerRight: () => ( props => <LogoTitle {...props}
-        //   <Icon
-        //     justifySelf={"center"}
-        //     name={"cart-outline"}
-        //     size={30}
-        //     color={"#2E5DB5"}
-        //     onPress={navigate("Shopping Cart")}
-        //   />
-        // ),]
-        // screenOptions={{ presentation: "modal" }}
-        name="Booster Passes"
-        component={AdmissionProductsScreen}
-      />
-      <AdmissionStack.Screen
-        options={{
-          headerShown: true,
-        }}
-        // screenOptions={{ presentation: "modal" }}
-        name="Shopping Cart"
-        component={AdmissionShoppingCartScreen}
-      />
-      <AdmissionStack.Screen
-        options={{
-          headerShown: true,
-        }}
-        screenOptions={{ presentation: "modal" }}
-        name="Check Out"
-        component={AdmissionCheckoutScreen}
-      />
-    </AdmissionStack.Navigator>
-  );
-}
 
 const App = () => {
   DataStore.start();

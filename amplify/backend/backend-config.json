@@ -6,21 +6,27 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AWS_IAM"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authboosteradvantage"
+            }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "apiKeyExpirationDays": 80,
-                "apiKeyExpirationDate": "2022-08-02T00:02:13.001Z",
-                "description": "AKIAXTWQJ4XSSPCKDJEW"
-              }
+              "authenticationType": "AWS_IAM"
             }
           ]
         }
       },
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "boosteradvantage",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   },
   "auth": {
@@ -50,15 +56,25 @@
           "EMAIL"
         ]
       }
-    }
-  },
-  "storage": {
-    "s3boosteradvantagestorage4d0f883c": {
-      "service": "S3",
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
       "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "boosteradvantage",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ]
     }
   },
+  "storage": {},
   "function": {
     "CreatePaymentIntent": {
       "build": true,

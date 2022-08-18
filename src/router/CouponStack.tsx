@@ -16,8 +16,9 @@ import Icon from "@expo/vector-icons/Ionicons";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
-import Fundraiser from "../screens/Fundraiser";
-import FundraiserModalScreen from "../screens/FundraiserDonateScreen";
+import CouponHome from "../screens/CouponHome";
+import CouponsDisplay from "../screens/CouponsDisplay";
+//import FundraiserModalScreen from "../screens/FundraiserDonateScreen";
 
 import { StripeProvider } from "@stripe/stripe-react-native";
 
@@ -32,23 +33,23 @@ import { AmplifyProvider } from "@aws-amplify/ui-react";
 //   },
 // });
 
-const FundraiserStack = createNativeStackNavigator();
+const CouponStack = createNativeStackNavigator();
 
-function FundraiserStackScreen() {
+function CouponStackScreen() {
   return (
-    <FundraiserStack.Navigator>
-      <FundraiserStack.Screen
+    <CouponStack.Navigator>
+      <CouponStack.Screen
         options={{ headerShown: false }}
-        name="Fundraiser"
-        component={Fundraiser}
+        name="CouponHome"
+        component={CouponHome}
       />
-      <FundraiserStack.Screen
+      <CouponStack.Screen
         options={{ headerShown: false }}
-        name="fundraiserModal"
-        component={FundraiserModalScreen}
+        name="CouponsDisplay"
+        component={CouponsDisplay}
       />
-    </FundraiserStack.Navigator>
+    </CouponStack.Navigator>
   );
 }
 
-export default FundraiserStackScreen;
+export default CouponStackScreen;

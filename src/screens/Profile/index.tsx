@@ -11,8 +11,9 @@ import {
   ScrollView,
   SectionList,
   SafeAreaView,
+  Button,
 } from "react-native";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
 import {
   createBusiness,
   updateBusiness,
@@ -28,6 +29,7 @@ import { faBlackboard } from "@fortawesome/free-solid-svg-icons";
 import images from "../../components/schoolLogos.js";
 
 import styles from './styles';
+// import Button from "../../components/Button";
 
 // Storage.get('chick-fil-a.webp') // for listing ALL files without prefix, pass '' instead
 //     .then(result => console.log(result))
@@ -240,11 +242,22 @@ const games1 = [
   },
 ];
 
+// const SignOutMethod = async () => (
+//   await DataStore.clear()
+//   .then(await Auth.signOut())
+// );
+
 const Header = () => (
   <View style={styles.headerContainer}>
-    <Text style={styles.headerTitle}>Seahawk Athletics</Text>
+    <Text style={styles.headerTitle}>Profile</Text>
   </View>
 );
+
+const SignOut = () => (
+    <View style={styles.headerContainer}>
+      <Pressable onPress={() => Auth.signOut()}><Text>Sign Out!</Text></Pressable>
+    </View>
+  );
 
 const ListofGames = () => {
   const teamLogoUrl = (team) => {
@@ -378,14 +391,20 @@ const ListofGames = () => {
   );
 };
 
-const Schedule = () => {
+const Profile = () => {
+  // Hub.listen('auth', async (data) => {
+  //   if (data.payload.event === 'signOut') {
+  //     await DataStore.clear();
+  //   }
+  // });
+
   return (
     <>
       <Header />
-      <ListofGames />
+      <SignOut />
       {/* <BusinessList /> */}
     </>
   );
 };
 
-export default Schedule;
+export default Profile;

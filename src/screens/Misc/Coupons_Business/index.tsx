@@ -17,13 +17,13 @@ import {
   createBusiness,
   updateBusiness,
   deleteBusiness,
-} from "../../graphql/mutations";
+} from "../../../graphql/mutations";
 import { DataStore } from "@aws-amplify/datastore";
-import * as queries from "../../graphql/queries";
+import * as queries from "../../../graphql/queries";
 import { S3Image } from "aws-amplify-react-native";
-import { Business, Coupon } from "../../models";
+import { Business, Coupon } from "../../../models";
 import { Storage } from "@aws-amplify/storage";
-import images from "../../components/compLogos.js";
+import images from "../../../components/compLogos.js";
 
 import styles from './styles';
 
@@ -33,30 +33,30 @@ import styles from './styles';
 
 const Header = () => (
   <View style={styles.headerContainer}>
-    <Text style={styles.headerTitle}>Seahawk Sponsors</Text>
+    <Text style={styles.headerTitle}>Business Profile</Text>
   </View>
 );
 
-const FilterBusinessModalswithList = () => {
-  const [restaurant, setRestaurant] = useState(true);
-  const [wellness, setWellness] = useState(true);
-  const [services, setServices] = useState(true);
+// const FilterBusinessModalswithList = () => {
+//   const [restaurant, setRestaurant] = useState(true);
+//   const [wellness, setWellness] = useState(true);
+//   const [services, setServices] = useState(true);
 
-  function setRestaurantCategory() {
-    setRestaurant(!restaurant);
-    setWellness(true);
-    setServices(true);
-  }
-  function setWellnessCategory() {
-    setWellness(!wellness);
-    setRestaurant(true);
-    setServices(true);
-  }
-  function setServiceCategory() {
-    setServices(!services);
-    setWellness(true);
-    setRestaurant(true);
-  }
+//   function setRestaurantCategory() {
+//     setRestaurant(!restaurant);
+//     setWellness(true);
+//     setServices(true);
+//   }
+//   function setWellnessCategory() {
+//     setWellness(!wellness);
+//     setRestaurant(true);
+//     setServices(true);
+//   }
+//   function setServiceCategory() {
+//     setServices(!services);
+//     setWellness(true);
+//     setRestaurant(true);
+//   }
 
   const ListofBusinesses = () => {
     const [Businesses, setBusinesses] = useState([]);
@@ -98,18 +98,9 @@ const FilterBusinessModalswithList = () => {
     }, []);
 
     useEffect(() => {
-      //query the initial Coupon list and subscribe to data updates
-
-      let queryvalue = !wellness
-        ? "WELLNESS"
-        : !restaurant
-        ? "RESTAURANT"
-        : "SERVICE";
-      let ifFiltered = !wellness || !restaurant || !services;
-
-      async function fetchBusinesses() {
+      async function fetchBusiness() {
         const subscription = await DataStore.observeQuery(Business, (c) =>
-          ifFiltered ? c.category("eq", queryvalue) : c
+          c.name("eq", "Glory Days")
         ).subscribe((snapshot) => {
           //isSynced can be used to show a loading spinner when the list is being loaded. .filter(c => c.business.name === "restaurant")  const subscription = (DataStore.observeQuery(Coupon, (p) => p.description("eq", "10% of any entree"))).subscribe((snapshot)=> {
           //Business, c => ifFiltered ? c.category("eq", queryvalue) : c
@@ -121,7 +112,7 @@ const FilterBusinessModalswithList = () => {
           subscription.unsubscribe();
         };
       }
-      fetchBusinesses();
+      fetchBusiness();
       //unsubscribe to data updates when component is destroyed so that we don’t introduce a memory leak.
       // return function cleanup() {
       //   subscription.unsubscribe();
@@ -229,64 +220,11 @@ const FilterBusinessModalswithList = () => {
     );
   };
 
-  return (
-    <View>
-      <View style={styles.categoriesContainer}>
-        <Pressable
-          onPress={setRestaurantCategory}
-          style={
-            restaurant
-              ? styles.categoryContainer
-              : styles.categoryContainerPressed
-          }
-        >
-          <Text
-            style={
-              restaurant ? styles.categoryText : styles.categoryTextPressed
-            }
-          >
-            Restaurants
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={setWellnessCategory}
-          style={
-            wellness
-              ? styles.categoryContainer
-              : styles.categoryContainerPressed
-          }
-        >
-          <Text
-            style={wellness ? styles.categoryText : styles.categoryTextPressed}
-          >
-            Wellness
-          </Text>
-        </Pressable>
-        <Pressable
-          onPress={setServiceCategory}
-          style={
-            services
-              ? styles.categoryContainer
-              : styles.categoryContainerPressed
-          }
-        >
-          <Text
-            style={services ? styles.categoryText : styles.categoryTextPressed}
-          >
-            Services
-          </Text>
-        </Pressable>
-      </View>
-      <ListofBusinesses />
-    </View>
-  );
-};
-
 const BusinessHome = () => {
   return (
     <>
       <Header />
-      <FilterBusinessModalswithList />
+      <ListofBusinesses />
       {/* <BusinessList /> */}
     </>
   );

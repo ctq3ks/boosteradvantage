@@ -9,9 +9,9 @@ import {
   View,
 } from 'react-native';
 import { API } from 'aws-amplify';
-import { createCoupon, updateCoupon, deleteCoupon } from '../graphql/mutations';
+import { createCoupon, updateCoupon, deleteCoupon } from '../../graphql/mutations';
 import { DataStore } from '@aws-amplify/datastore';
-import { Business, Coupon } from '../models';
+import { Business, Coupon } from '../../models';
 
 
 const Header = () => (

@@ -1,13 +1,3 @@
-type Mutation {
-  createPaymentIntent(amount: Int!): PaymentIntent!
-    @function(name: "CreatePaymentIntent-${env}")
-    @auth(rules: [{ allow: private, provider: iam }])
-}
-
-type PaymentIntent {
-  clientSecret: String!
-}
-
 enum CouponType {
   PRICE
   ITEM
@@ -19,83 +9,78 @@ enum BusinessCategory {
   SERVICE
 }
 
-type BoosterPass @model @auth(rules: [{ allow: private, provider: iam }]) {
+type BoosterPass @model @auth(rules: [{allow: private}]) {
   id: ID!
   isUsed: Boolean!
-  userID: ID! @index(name: "byUser")
+  userID: String!
   type: String
 }
 
-type User @model @auth(rules: [{ allow: private, provider: iam }]) {
+type BusinessAdmin @model @auth(rules: [{allow: private}]) {
   id: ID!
   email: AWSEmail
   phonenumber: AWSPhone
   username: String
-  Coupons: [Coupon] @hasMany(indexName: "byUser", fields: ["id"])
-  BoosterPass: [BoosterPass] @hasMany(indexName: "byUser", fields: ["id"])
+  businessID: ID!
+  Business: Business @hasOne(fields: ["businessID"])
 }
 
-type Business @model @auth(rules: [{ allow: private, provider: iam }]) {
+type Business @model @auth(rules: [{allow: private}]) {
   id: ID!
   name: String!
   location: String!
-  coupons: [Coupon] @hasMany
+  coupons: [Coupon] @hasMany(indexName: "byBusiness", fields: ["id"])
   category: BusinessCategory!
 }
 
-type Coupon @model @auth(rules: [{ allow: private, provider: iam }]) {
+type Coupon @model @auth(rules: [{allow: private}]) {
   id: ID!
-  business: Business! @belongsTo
-  userID: ID @index(name: "byUser")
-  couponType: CouponType!
+  business: Business! @belongsTo(fields: ["businessID"])
+  couponType: CouponType
   currentPrice: Float
   discountPrice: Float
   itemDescription: String!
-  expirationDate: AWSDate
+  startDate: AWSDate!
+  expirationDate: AWSDate!
+  businessID: ID! @index(name: "byBusiness")
+  termsAndConditions: String!
 }
 
-type Product @model @auth(rules: [{ allow: private, provider: iam }]) {
+type Product @model @auth(rules: [{allow: private}]) {
   id: ID!
   title: String!
   description: String
-  image: String
-  images: [String!]
-  options: [String!]
-
   price: Float!
   oldPrice: Float
 }
 
-type CartProduct @model @auth(rules: [{ allow: private, provider: iam }]) {
+type CartProduct @model @auth(rules: [{allow: private}]) {
   id: ID!
   userSub: String!
   quantity: Int!
   option: String
-
   productID: ID!
   product: Product @hasOne(fields: ["productID"])
   productTitle: String
 }
 
-type OrderProduct @model @auth(rules: [{ allow: private, provider: iam }]) {
+type OrderProduct @model @auth(rules: [{allow: private}]) {
   id: ID!
   quantity: Int!
   option: String
-
   productID: ID
   product: Product @hasOne(fields: ["productID"])
-
   orderID: ID
   order: Order @hasOne(fields: ["orderID"])
 }
 
-type Order @model @auth(rules: [{ allow: private, provider: iam }]) {
+type Order @model @auth(rules: [{allow: private}]) {
   id: ID!
   userSub: String!
-
   fullName: String!
   phoneNumber: String
   country: String
   city: String
   address: String
 }
+ 

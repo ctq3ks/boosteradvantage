@@ -160,7 +160,7 @@ function AdmissionCheckoutScreen({ navigation, route }) {
         )
       )
     );
-
+    //this is to add the correct number of booster passes types for the order bc cartItem has a numbe rof products associated with it
     await Promise.all(
       cartItems.map((cartItem) => {
         if (cartItem.quantity > 1) {

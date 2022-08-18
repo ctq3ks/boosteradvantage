@@ -2,5 +2,11 @@
   "AppSyncApiName": "boosteradvantage",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-03-24T02:44:48.195Z"
+  "AuthModeLastUpdated": "2022-07-07T22:51:28.385Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authboosteradvantage",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

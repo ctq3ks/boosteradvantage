@@ -38,7 +38,10 @@
     "serviceName": "Cognito",
     "useDefault": "manual",
     "userPoolGroups": false,
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "schoolAdmin",
+      "businessAdmin"
+    ],
     "adminQueries": false,
     "thirdPartyAuth": false,
     "authProviders": [],

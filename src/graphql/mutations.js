@@ -1,13 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createPaymentIntent = /* GraphQL */ `
-  mutation CreatePaymentIntent($amount: Int!) {
-    createPaymentIntent(amount: $amount) {
-      clientSecret
-    }
-  }
-`;
 export const createBoosterPass = /* GraphQL */ `
   mutation CreateBoosterPass(
     $input: CreateBoosterPassInput!
@@ -62,60 +55,46 @@ export const deleteBoosterPass = /* GraphQL */ `
     }
   }
 `;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
+export const createBusinessAdmin = /* GraphQL */ `
+  mutation CreateBusinessAdmin(
+    $input: CreateBusinessAdminInput!
+    $condition: ModelBusinessAdminConditionInput
   ) {
-    createUser(input: $input, condition: $condition) {
+    createBusinessAdmin(input: $input, condition: $condition) {
       id
       email
       phonenumber
       username
-      Coupons {
-        items {
-          id
-          business {
+      businessID
+      Business {
+        id
+        name
+        location
+        coupons {
+          items {
             id
-            name
-            location
-            category
+            couponType
+            currentPrice
+            discountPrice
+            itemDescription
+            startDate
+            expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
           }
-          userID
-          couponType
-          currentPrice
-          discountPrice
-          itemDescription
-          expirationDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          businessCouponsId
+          nextToken
+          startedAt
         }
-        nextToken
-        startedAt
-      }
-      BoosterPass {
-        items {
-          id
-          isUsed
-          userID
-          type
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
@@ -125,60 +104,46 @@ export const createUser = /* GraphQL */ `
     }
   }
 `;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
+export const updateBusinessAdmin = /* GraphQL */ `
+  mutation UpdateBusinessAdmin(
+    $input: UpdateBusinessAdminInput!
+    $condition: ModelBusinessAdminConditionInput
   ) {
-    updateUser(input: $input, condition: $condition) {
+    updateBusinessAdmin(input: $input, condition: $condition) {
       id
       email
       phonenumber
       username
-      Coupons {
-        items {
-          id
-          business {
+      businessID
+      Business {
+        id
+        name
+        location
+        coupons {
+          items {
             id
-            name
-            location
-            category
+            couponType
+            currentPrice
+            discountPrice
+            itemDescription
+            startDate
+            expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
           }
-          userID
-          couponType
-          currentPrice
-          discountPrice
-          itemDescription
-          expirationDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          businessCouponsId
+          nextToken
+          startedAt
         }
-        nextToken
-        startedAt
-      }
-      BoosterPass {
-        items {
-          id
-          isUsed
-          userID
-          type
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
@@ -188,60 +153,46 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
+export const deleteBusinessAdmin = /* GraphQL */ `
+  mutation DeleteBusinessAdmin(
+    $input: DeleteBusinessAdminInput!
+    $condition: ModelBusinessAdminConditionInput
   ) {
-    deleteUser(input: $input, condition: $condition) {
+    deleteBusinessAdmin(input: $input, condition: $condition) {
       id
       email
       phonenumber
       username
-      Coupons {
-        items {
-          id
-          business {
+      businessID
+      Business {
+        id
+        name
+        location
+        coupons {
+          items {
             id
-            name
-            location
-            category
+            couponType
+            currentPrice
+            discountPrice
+            itemDescription
+            startDate
+            expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
           }
-          userID
-          couponType
-          currentPrice
-          discountPrice
-          itemDescription
-          expirationDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          businessCouponsId
+          nextToken
+          startedAt
         }
-        nextToken
-        startedAt
-      }
-      BoosterPass {
-        items {
-          id
-          isUsed
-          userID
-          type
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
+        category
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       createdAt
       updatedAt
@@ -274,18 +225,18 @@ export const createBusiness = /* GraphQL */ `
             _deleted
             _lastChangedAt
           }
-          userID
           couponType
           currentPrice
           discountPrice
           itemDescription
+          startDate
           expirationDate
+          businessID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          businessCouponsId
         }
         nextToken
         startedAt
@@ -322,18 +273,18 @@ export const updateBusiness = /* GraphQL */ `
             _deleted
             _lastChangedAt
           }
-          userID
           couponType
           currentPrice
           discountPrice
           itemDescription
+          startDate
           expirationDate
+          businessID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          businessCouponsId
         }
         nextToken
         startedAt
@@ -370,18 +321,18 @@ export const deleteBusiness = /* GraphQL */ `
             _deleted
             _lastChangedAt
           }
-          userID
           couponType
           currentPrice
           discountPrice
           itemDescription
+          startDate
           expirationDate
+          businessID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          businessCouponsId
         }
         nextToken
         startedAt
@@ -409,18 +360,18 @@ export const createCoupon = /* GraphQL */ `
         coupons {
           items {
             id
-            userID
             couponType
             currentPrice
             discountPrice
             itemDescription
+            startDate
             expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            businessCouponsId
           }
           nextToken
           startedAt
@@ -432,18 +383,18 @@ export const createCoupon = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      userID
       couponType
       currentPrice
       discountPrice
       itemDescription
+      startDate
       expirationDate
+      businessID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      businessCouponsId
     }
   }
 `;
@@ -461,18 +412,18 @@ export const updateCoupon = /* GraphQL */ `
         coupons {
           items {
             id
-            userID
             couponType
             currentPrice
             discountPrice
             itemDescription
+            startDate
             expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            businessCouponsId
           }
           nextToken
           startedAt
@@ -484,18 +435,18 @@ export const updateCoupon = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      userID
       couponType
       currentPrice
       discountPrice
       itemDescription
+      startDate
       expirationDate
+      businessID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      businessCouponsId
     }
   }
 `;
@@ -513,18 +464,18 @@ export const deleteCoupon = /* GraphQL */ `
         coupons {
           items {
             id
-            userID
             couponType
             currentPrice
             discountPrice
             itemDescription
+            startDate
             expirationDate
+            businessID
             createdAt
             updatedAt
             _version
             _deleted
             _lastChangedAt
-            businessCouponsId
           }
           nextToken
           startedAt
@@ -536,18 +487,18 @@ export const deleteCoupon = /* GraphQL */ `
         _deleted
         _lastChangedAt
       }
-      userID
       couponType
       currentPrice
       discountPrice
       itemDescription
+      startDate
       expirationDate
+      businessID
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      businessCouponsId
     }
   }
 `;
@@ -560,9 +511,6 @@ export const createProduct = /* GraphQL */ `
       id
       title
       description
-      image
-      images
-      options
       price
       oldPrice
       createdAt
@@ -582,9 +530,6 @@ export const updateProduct = /* GraphQL */ `
       id
       title
       description
-      image
-      images
-      options
       price
       oldPrice
       createdAt
@@ -604,9 +549,6 @@ export const deleteProduct = /* GraphQL */ `
       id
       title
       description
-      image
-      images
-      options
       price
       oldPrice
       createdAt
@@ -632,9 +574,6 @@ export const createCartProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt
@@ -667,9 +606,6 @@ export const updateCartProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt
@@ -702,9 +638,6 @@ export const deleteCartProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt
@@ -736,9 +669,6 @@ export const createOrderProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt
@@ -784,9 +714,6 @@ export const updateOrderProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt
@@ -832,9 +759,6 @@ export const deleteOrderProduct = /* GraphQL */ `
         id
         title
         description
-        image
-        images
-        options
         price
         oldPrice
         createdAt

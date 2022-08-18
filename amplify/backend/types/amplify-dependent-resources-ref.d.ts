@@ -1,7 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
     "api": {
         "boosteradvantage": {
-            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
@@ -15,12 +14,10 @@ export type AmplifyDependentResourcesAttributes = {
             "UserPoolName": "string",
             "AppClientIDWeb": "string",
             "AppClientID": "string"
-        }
-    },
-    "storage": {
-        "s3boosteradvantagestorage4d0f883c": {
-            "BucketName": "string",
-            "Region": "string"
+        },
+        "userPoolGroups": {
+            "schoolAdminGroupRole": "string",
+            "businessAdminGroupRole": "string"
         }
     },
     "function": {
