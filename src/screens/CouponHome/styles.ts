@@ -70,15 +70,16 @@ const styles = StyleSheet.create({
       justifyContent: "space-between",
     },
     CouponItemContainerDescription: {
-      flex: 4,
+      flex: 8,
       margin: 15,
-      // backgroundColor: "blue",
+      // backgroundColor: "red",
     },
     CouponItemContainerExpiration: {
-      flex: 1,
+      flex: 3,
       // backgroundColor: "blue",
       margin: 5,
       justifyContent: "center",
+      alignItems: "center",
     },
     BusinessHeadingText: {
       fontSize: 18,

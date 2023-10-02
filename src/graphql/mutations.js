@@ -1,6 +1,135 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createDonorProfile = /* GraphQL */ `
+  mutation CreateDonorProfile(
+    $input: CreateDonorProfileInput!
+    $condition: ModelDonorProfileConditionInput
+  ) {
+    createDonorProfile(input: $input, condition: $condition) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateDonorProfile = /* GraphQL */ `
+  mutation UpdateDonorProfile(
+    $input: UpdateDonorProfileInput!
+    $condition: ModelDonorProfileConditionInput
+  ) {
+    updateDonorProfile(input: $input, condition: $condition) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteDonorProfile = /* GraphQL */ `
+  mutation DeleteDonorProfile(
+    $input: DeleteDonorProfileInput!
+    $condition: ModelDonorProfileConditionInput
+  ) {
+    deleteDonorProfile(input: $input, condition: $condition) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createFundraiser = /* GraphQL */ `
+  mutation CreateFundraiser(
+    $input: CreateFundraiserInput!
+    $condition: ModelFundraiserConditionInput
+  ) {
+    createFundraiser(input: $input, condition: $condition) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateFundraiser = /* GraphQL */ `
+  mutation UpdateFundraiser(
+    $input: UpdateFundraiserInput!
+    $condition: ModelFundraiserConditionInput
+  ) {
+    updateFundraiser(input: $input, condition: $condition) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteFundraiser = /* GraphQL */ `
+  mutation DeleteFundraiser(
+    $input: DeleteFundraiserInput!
+    $condition: ModelFundraiserConditionInput
+  ) {
+    deleteFundraiser(input: $input, condition: $condition) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const createBoosterPass = /* GraphQL */ `
   mutation CreateBoosterPass(
     $input: CreateBoosterPassInput!
@@ -66,36 +195,6 @@ export const createBusinessAdmin = /* GraphQL */ `
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -115,36 +214,6 @@ export const updateBusinessAdmin = /* GraphQL */ `
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -164,36 +233,6 @@ export const deleteBusinessAdmin = /* GraphQL */ `
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -214,17 +253,6 @@ export const createBusiness = /* GraphQL */ `
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -232,6 +260,9 @@ export const createBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -242,6 +273,32 @@ export const createBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -262,17 +319,6 @@ export const updateBusiness = /* GraphQL */ `
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -280,6 +326,9 @@ export const updateBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -290,6 +339,32 @@ export const updateBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -310,17 +385,6 @@ export const deleteBusiness = /* GraphQL */ `
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -328,6 +392,9 @@ export const deleteBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -338,6 +405,32 @@ export const deleteBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -353,36 +446,6 @@ export const createCoupon = /* GraphQL */ `
   ) {
     createCoupon(input: $input, condition: $condition) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -390,6 +453,9 @@ export const createCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -405,36 +471,6 @@ export const updateCoupon = /* GraphQL */ `
   ) {
     updateCoupon(input: $input, condition: $condition) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -442,6 +478,9 @@ export const updateCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -457,36 +496,6 @@ export const deleteCoupon = /* GraphQL */ `
   ) {
     deleteCoupon(input: $input, condition: $condition) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -494,6 +503,9 @@ export const deleteCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -588,6 +600,7 @@ export const createCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
@@ -620,6 +633,7 @@ export const updateCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
@@ -652,6 +666,7 @@ export const deleteCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
@@ -697,6 +712,8 @@ export const createOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
@@ -742,6 +759,8 @@ export const updateOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
@@ -787,6 +806,8 @@ export const deleteOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
@@ -850,6 +871,13 @@ export const deleteOrder = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+    }
+  }
+`;
+export const createPaymentIntent = /* GraphQL */ `
+  mutation CreatePaymentIntent($amount: Int!) {
+    createPaymentIntent(amount: $amount) {
+      clientSecret
     }
   }
 `;

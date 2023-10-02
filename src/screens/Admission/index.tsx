@@ -214,7 +214,7 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
       // {/* <View style={ styles.BoosterPassesContainerScroll }> */}
       <ScrollView
         style={styles.BoosterPassesContainerScroll}
-        contentContainerStyle={{ paddingBottom: 50 }}
+        // contentContainerStyle={{ backgroundColor: "blue"}}
       >
         <View
           //onPress={() => setIsRedeemBoosterVisible(true)}
@@ -259,7 +259,7 @@ const FilterBoosterPassModalswithList = ({ nav }) => {
   };
   // onPress={() => nav.navigate("admissionModal") Auth. signOut()
   return (
-    <View>
+    <View style={styles.backgroundContainer}>
       <BoosterPasses />
       <View style={styles.PurchaseContainer}>
         <Pressable

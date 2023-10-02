@@ -19,8 +19,14 @@
       "function": {
         "CreatePaymentIntent": {
           "deploymentBucketName": "amplify-boosteradvantage-dev-103057-deployment",
-          "s3Key": "amplify-builds/CreatePaymentIntent-654363326f4938764c4d-build.zip"
+          "s3Key": "amplify-builds/CreatePaymentIntent-344b34657868514a3256-build.zip"
         }
+      },
+      "storage": {
+        "s3boosteradvantagestorage6c47cc6d": {}
+      },
+      "api": {
+        "boosteradvantage": {}
       }
     }
   }

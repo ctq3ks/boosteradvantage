@@ -1,9 +1,134 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateDonorProfile = /* GraphQL */ `
+  subscription OnCreateDonorProfile(
+    $filter: ModelSubscriptionDonorProfileFilterInput
+  ) {
+    onCreateDonorProfile(filter: $filter) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateDonorProfile = /* GraphQL */ `
+  subscription OnUpdateDonorProfile(
+    $filter: ModelSubscriptionDonorProfileFilterInput
+  ) {
+    onUpdateDonorProfile(filter: $filter) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteDonorProfile = /* GraphQL */ `
+  subscription OnDeleteDonorProfile(
+    $filter: ModelSubscriptionDonorProfileFilterInput
+  ) {
+    onDeleteDonorProfile(filter: $filter) {
+      id
+      userSub
+      totalRaised
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateFundraiser = /* GraphQL */ `
+  subscription OnCreateFundraiser(
+    $filter: ModelSubscriptionFundraiserFilterInput
+  ) {
+    onCreateFundraiser(filter: $filter) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateFundraiser = /* GraphQL */ `
+  subscription OnUpdateFundraiser(
+    $filter: ModelSubscriptionFundraiserFilterInput
+  ) {
+    onUpdateFundraiser(filter: $filter) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteFundraiser = /* GraphQL */ `
+  subscription OnDeleteFundraiser(
+    $filter: ModelSubscriptionFundraiserFilterInput
+  ) {
+    onDeleteFundraiser(filter: $filter) {
+      id
+      title
+      dollarsRaised
+      dollarsGoal
+      raiseByDate
+      businessBool
+      businessPromo
+      donors
+      image
+      fundee
+      isActive
+      businessID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateBoosterPass = /* GraphQL */ `
-  subscription OnCreateBoosterPass {
-    onCreateBoosterPass {
+  subscription OnCreateBoosterPass(
+    $filter: ModelSubscriptionBoosterPassFilterInput
+  ) {
+    onCreateBoosterPass(filter: $filter) {
       id
       isUsed
       userID
@@ -17,8 +142,10 @@ export const onCreateBoosterPass = /* GraphQL */ `
   }
 `;
 export const onUpdateBoosterPass = /* GraphQL */ `
-  subscription OnUpdateBoosterPass {
-    onUpdateBoosterPass {
+  subscription OnUpdateBoosterPass(
+    $filter: ModelSubscriptionBoosterPassFilterInput
+  ) {
+    onUpdateBoosterPass(filter: $filter) {
       id
       isUsed
       userID
@@ -32,8 +159,10 @@ export const onUpdateBoosterPass = /* GraphQL */ `
   }
 `;
 export const onDeleteBoosterPass = /* GraphQL */ `
-  subscription OnDeleteBoosterPass {
-    onDeleteBoosterPass {
+  subscription OnDeleteBoosterPass(
+    $filter: ModelSubscriptionBoosterPassFilterInput
+  ) {
+    onDeleteBoosterPass(filter: $filter) {
       id
       isUsed
       userID
@@ -47,43 +176,15 @@ export const onDeleteBoosterPass = /* GraphQL */ `
   }
 `;
 export const onCreateBusinessAdmin = /* GraphQL */ `
-  subscription OnCreateBusinessAdmin {
-    onCreateBusinessAdmin {
+  subscription OnCreateBusinessAdmin(
+    $filter: ModelSubscriptionBusinessAdminFilterInput
+  ) {
+    onCreateBusinessAdmin(filter: $filter) {
       id
       email
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -93,43 +194,15 @@ export const onCreateBusinessAdmin = /* GraphQL */ `
   }
 `;
 export const onUpdateBusinessAdmin = /* GraphQL */ `
-  subscription OnUpdateBusinessAdmin {
-    onUpdateBusinessAdmin {
+  subscription OnUpdateBusinessAdmin(
+    $filter: ModelSubscriptionBusinessAdminFilterInput
+  ) {
+    onUpdateBusinessAdmin(filter: $filter) {
       id
       email
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -139,43 +212,15 @@ export const onUpdateBusinessAdmin = /* GraphQL */ `
   }
 `;
 export const onDeleteBusinessAdmin = /* GraphQL */ `
-  subscription OnDeleteBusinessAdmin {
-    onDeleteBusinessAdmin {
+  subscription OnDeleteBusinessAdmin(
+    $filter: ModelSubscriptionBusinessAdminFilterInput
+  ) {
+    onDeleteBusinessAdmin(filter: $filter) {
       id
       email
       phonenumber
       username
       businessID
-      Business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       createdAt
       updatedAt
       _version
@@ -185,25 +230,14 @@ export const onDeleteBusinessAdmin = /* GraphQL */ `
   }
 `;
 export const onCreateBusiness = /* GraphQL */ `
-  subscription OnCreateBusiness {
-    onCreateBusiness {
+  subscription OnCreateBusiness($filter: ModelSubscriptionBusinessFilterInput) {
+    onCreateBusiness(filter: $filter) {
       id
       name
       location
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -211,6 +245,9 @@ export const onCreateBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -221,6 +258,32 @@ export const onCreateBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -230,25 +293,14 @@ export const onCreateBusiness = /* GraphQL */ `
   }
 `;
 export const onUpdateBusiness = /* GraphQL */ `
-  subscription OnUpdateBusiness {
-    onUpdateBusiness {
+  subscription OnUpdateBusiness($filter: ModelSubscriptionBusinessFilterInput) {
+    onUpdateBusiness(filter: $filter) {
       id
       name
       location
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -256,6 +308,9 @@ export const onUpdateBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -266,6 +321,32 @@ export const onUpdateBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -275,25 +356,14 @@ export const onUpdateBusiness = /* GraphQL */ `
   }
 `;
 export const onDeleteBusiness = /* GraphQL */ `
-  subscription OnDeleteBusiness {
-    onDeleteBusiness {
+  subscription OnDeleteBusiness($filter: ModelSubscriptionBusinessFilterInput) {
+    onDeleteBusiness(filter: $filter) {
       id
       name
       location
       coupons {
         items {
           id
-          business {
-            id
-            name
-            location
-            category
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
           couponType
           currentPrice
           discountPrice
@@ -301,6 +371,9 @@ export const onDeleteBusiness = /* GraphQL */ `
           startDate
           expirationDate
           businessID
+          termsAndConditions
+          couponImage
+          boosterDonation
           createdAt
           updatedAt
           _version
@@ -311,6 +384,32 @@ export const onDeleteBusiness = /* GraphQL */ `
         startedAt
       }
       category
+      adminSub
+      contact
+      logo
+      fundraisers {
+        items {
+          id
+          title
+          dollarsRaised
+          dollarsGoal
+          raiseByDate
+          businessBool
+          businessPromo
+          donors
+          image
+          fundee
+          isActive
+          businessID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -320,39 +419,9 @@ export const onDeleteBusiness = /* GraphQL */ `
   }
 `;
 export const onCreateCoupon = /* GraphQL */ `
-  subscription OnCreateCoupon {
-    onCreateCoupon {
+  subscription OnCreateCoupon($filter: ModelSubscriptionCouponFilterInput) {
+    onCreateCoupon(filter: $filter) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -360,6 +429,9 @@ export const onCreateCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -369,39 +441,9 @@ export const onCreateCoupon = /* GraphQL */ `
   }
 `;
 export const onUpdateCoupon = /* GraphQL */ `
-  subscription OnUpdateCoupon {
-    onUpdateCoupon {
+  subscription OnUpdateCoupon($filter: ModelSubscriptionCouponFilterInput) {
+    onUpdateCoupon(filter: $filter) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -409,6 +451,9 @@ export const onUpdateCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -418,39 +463,9 @@ export const onUpdateCoupon = /* GraphQL */ `
   }
 `;
 export const onDeleteCoupon = /* GraphQL */ `
-  subscription OnDeleteCoupon {
-    onDeleteCoupon {
+  subscription OnDeleteCoupon($filter: ModelSubscriptionCouponFilterInput) {
+    onDeleteCoupon(filter: $filter) {
       id
-      business {
-        id
-        name
-        location
-        coupons {
-          items {
-            id
-            couponType
-            currentPrice
-            discountPrice
-            itemDescription
-            startDate
-            expirationDate
-            businessID
-            createdAt
-            updatedAt
-            _version
-            _deleted
-            _lastChangedAt
-          }
-          nextToken
-          startedAt
-        }
-        category
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
       couponType
       currentPrice
       discountPrice
@@ -458,6 +473,9 @@ export const onDeleteCoupon = /* GraphQL */ `
       startDate
       expirationDate
       businessID
+      termsAndConditions
+      couponImage
+      boosterDonation
       createdAt
       updatedAt
       _version
@@ -467,8 +485,8 @@ export const onDeleteCoupon = /* GraphQL */ `
   }
 `;
 export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct {
-    onCreateProduct {
+  subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onCreateProduct(filter: $filter) {
       id
       title
       description
@@ -483,8 +501,8 @@ export const onCreateProduct = /* GraphQL */ `
   }
 `;
 export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct {
-    onUpdateProduct {
+  subscription OnUpdateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onUpdateProduct(filter: $filter) {
       id
       title
       description
@@ -499,8 +517,8 @@ export const onUpdateProduct = /* GraphQL */ `
   }
 `;
 export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct {
-    onDeleteProduct {
+  subscription OnDeleteProduct($filter: ModelSubscriptionProductFilterInput) {
+    onDeleteProduct(filter: $filter) {
       id
       title
       description
@@ -515,8 +533,10 @@ export const onDeleteProduct = /* GraphQL */ `
   }
 `;
 export const onCreateCartProduct = /* GraphQL */ `
-  subscription OnCreateCartProduct {
-    onCreateCartProduct {
+  subscription OnCreateCartProduct(
+    $filter: ModelSubscriptionCartProductFilterInput
+  ) {
+    onCreateCartProduct(filter: $filter) {
       id
       userSub
       quantity
@@ -540,12 +560,15 @@ export const onCreateCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
 export const onUpdateCartProduct = /* GraphQL */ `
-  subscription OnUpdateCartProduct {
-    onUpdateCartProduct {
+  subscription OnUpdateCartProduct(
+    $filter: ModelSubscriptionCartProductFilterInput
+  ) {
+    onUpdateCartProduct(filter: $filter) {
       id
       userSub
       quantity
@@ -569,12 +592,15 @@ export const onUpdateCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
 export const onDeleteCartProduct = /* GraphQL */ `
-  subscription OnDeleteCartProduct {
-    onDeleteCartProduct {
+  subscription OnDeleteCartProduct(
+    $filter: ModelSubscriptionCartProductFilterInput
+  ) {
+    onDeleteCartProduct(filter: $filter) {
       id
       userSub
       quantity
@@ -598,12 +624,15 @@ export const onDeleteCartProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      cartProductProductId
     }
   }
 `;
 export const onCreateOrderProduct = /* GraphQL */ `
-  subscription OnCreateOrderProduct {
-    onCreateOrderProduct {
+  subscription OnCreateOrderProduct(
+    $filter: ModelSubscriptionOrderProductFilterInput
+  ) {
+    onCreateOrderProduct(filter: $filter) {
       id
       quantity
       option
@@ -640,12 +669,16 @@ export const onCreateOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
 export const onUpdateOrderProduct = /* GraphQL */ `
-  subscription OnUpdateOrderProduct {
-    onUpdateOrderProduct {
+  subscription OnUpdateOrderProduct(
+    $filter: ModelSubscriptionOrderProductFilterInput
+  ) {
+    onUpdateOrderProduct(filter: $filter) {
       id
       quantity
       option
@@ -682,12 +715,16 @@ export const onUpdateOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
 export const onDeleteOrderProduct = /* GraphQL */ `
-  subscription OnDeleteOrderProduct {
-    onDeleteOrderProduct {
+  subscription OnDeleteOrderProduct(
+    $filter: ModelSubscriptionOrderProductFilterInput
+  ) {
+    onDeleteOrderProduct(filter: $filter) {
       id
       quantity
       option
@@ -724,12 +761,14 @@ export const onDeleteOrderProduct = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      orderProductProductId
+      orderProductOrderId
     }
   }
 `;
 export const onCreateOrder = /* GraphQL */ `
-  subscription OnCreateOrder {
-    onCreateOrder {
+  subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onCreateOrder(filter: $filter) {
       id
       userSub
       fullName
@@ -746,8 +785,8 @@ export const onCreateOrder = /* GraphQL */ `
   }
 `;
 export const onUpdateOrder = /* GraphQL */ `
-  subscription OnUpdateOrder {
-    onUpdateOrder {
+  subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onUpdateOrder(filter: $filter) {
       id
       userSub
       fullName
@@ -764,8 +803,8 @@ export const onUpdateOrder = /* GraphQL */ `
   }
 `;
 export const onDeleteOrder = /* GraphQL */ `
-  subscription OnDeleteOrder {
-    onDeleteOrder {
+  subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onDeleteOrder(filter: $filter) {
       id
       userSub
       fullName

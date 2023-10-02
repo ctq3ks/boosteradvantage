@@ -1,3 +1,34 @@
+type Mutation {
+  createPaymentIntent(amount: Int!): PaymentIntent!
+    @function(name: "CreatePaymentIntent-${env}")
+    @auth(rules: [{ allow: private }])
+}
+
+type PaymentIntent {
+  clientSecret: String!
+}
+
+type DonorProfile @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  userSub: String
+  totalRaised: Float
+}
+
+type Fundraiser @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  title: String
+  dollarsRaised: Float
+  dollarsGoal: Float
+  raiseByDate: AWSDate
+  businessBool: Boolean
+  businessPromo: String
+  donors: AWSJSON
+  image: String
+  fundee: String
+  isActive: Boolean
+  businessID: ID @index(name: "byBusiness")
+}
+
 enum CouponType {
   PRICE
   ITEM
@@ -22,20 +53,22 @@ type BusinessAdmin @model @auth(rules: [{allow: private}]) {
   phonenumber: AWSPhone
   username: String
   businessID: ID!
-  Business: Business @hasOne(fields: ["businessID"])
 }
 
-type Business @model @auth(rules: [{allow: private}]) {
+type Business @model @auth(rules: [{allow: private}, {allow: groups, groups: ["boosterAdvantageAdmin"], operations: [read, create, update, delete]}]) {
   id: ID!
-  name: String!
-  location: String!
+  name: String
+  location: String
   coupons: [Coupon] @hasMany(indexName: "byBusiness", fields: ["id"])
   category: BusinessCategory!
+  adminSub: String
+  contact: AWSPhone
+  logo: String
+  fundraisers: [Fundraiser] @hasMany(indexName: "byBusiness", fields: ["id"])
 }
 
 type Coupon @model @auth(rules: [{allow: private}]) {
   id: ID!
-  business: Business! @belongsTo(fields: ["businessID"])
   couponType: CouponType
   currentPrice: Float
   discountPrice: Float
@@ -44,6 +77,8 @@ type Coupon @model @auth(rules: [{allow: private}]) {
   expirationDate: AWSDate!
   businessID: ID! @index(name: "byBusiness")
   termsAndConditions: String!
+  couponImage: String
+  boosterDonation: Float
 }
 
 type Product @model @auth(rules: [{allow: private}]) {
@@ -60,7 +95,7 @@ type CartProduct @model @auth(rules: [{allow: private}]) {
   quantity: Int!
   option: String
   productID: ID!
-  product: Product @hasOne(fields: ["productID"])
+  product: Product @hasOne
   productTitle: String
 }
 
@@ -69,9 +104,9 @@ type OrderProduct @model @auth(rules: [{allow: private}]) {
   quantity: Int!
   option: String
   productID: ID
-  product: Product @hasOne(fields: ["productID"])
+  product: Product @hasOne
   orderID: ID
-  order: Order @hasOne(fields: ["orderID"])
+  order: Order @hasOne
 }
 
 type Order @model @auth(rules: [{allow: private}]) {

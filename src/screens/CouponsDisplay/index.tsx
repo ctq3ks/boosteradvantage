@@ -335,7 +335,7 @@ function CouponsDisplay({ route, navigation }) {
           <View style={styles.separator} />
           <View style={styles.TermsAndConditionsContainer}>
             <Text style={styles.TermsAndConditionsText}>
-              {coupon.termsAndConditions}
+              {co}
             </Text>
 
           </View>

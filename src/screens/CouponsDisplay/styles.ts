@@ -1,4 +1,4 @@
-import { faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons';
+import { faBlackboard, faGreaterThanEqual } from '@fortawesome/free-solid-svg-icons';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -95,20 +95,15 @@ const styles = StyleSheet.create({
       justifyContent: "center",
     },
     BusinessHeadingText: {
-      fontSize: 18,
-      fontWeight: "500",
-      alignSelf: "center",
+      fontSize: 23,
+      fontWeight: "400",
+      // alignSelf: "start",
+      // margin: 3,
     },
     BusinessLocationText: {
       fontSize: 14,
       fontWeight: "400",
-    },
-    BusinessLogo: {
-      // marginHorizontal: 6,
-      // marginVertical: 6,
-      borderRadius: 100,
-      width: 70,
-      height: 70,
+      // marginHorizontal: 5,
     },
     categoryText: {
       color: "#2E5DB5",
@@ -178,13 +173,50 @@ const styles = StyleSheet.create({
       // flex: 3,
       padding: 5,
       // backgroundColor: "red",
-      shadowOffset: {
-        height: 1,
-        width: 1,
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 1,
+      // shadowOffset: {
+      //   height: 1,
+      //   width: 1,
+      // },
+      // shadowOpacity: 0.2,
+      // shadowRadius: 1,
     },
+    CouponHeaderImage: {
+      // marginHorizontal: 6,
+      // marginVertical: 6,
+      
+      width: "auto",
+      height: 150,
+      resizeMode: 'contain',
+      borderRadius: 20,
+    },
+
+    BusinessLogoContainer: {
+      // flex: 3,
+      margin: 5,
+      width: 120,
+      height: 120,
+      // border: 5,
+      // borderColor: "black",
+      // backgroundColor: "red",
+      // shadowOffset: {
+      //   height: 1,
+      //   width: 1,
+      // },
+      // shadowOpacity: 0.2,
+      // shadowRadius: 1,
+    },
+    BusinessLogo: {
+      // marginHorizontal: 6,
+      // marginVertical: 6,
+      // borderRadius: 100,
+      // width: "auto",
+      // height: 100,
+      width: "100%",
+      height: "100%",
+      resizeMode: 'contain',
+      // backgroundColor: "cover",
+    },
+
     DescriptionCouponContainer: {
       // flex: 1,
       flexDirection: "column",
@@ -229,17 +261,38 @@ const styles = StyleSheet.create({
       // alignSelf: "center",
       letterSpacing: 0.25,
     },
-    CouponHeaderImage: {
-      // marginHorizontal: 6,
-      // marginVertical: 6,
-      borderRadius: 10,
-      width: "auto",
-      height: 150,
-    },
     separator: {
       borderBottomColor: "gray",
       marginVertical: 8,
+      marginHorizontal: 12,
       borderBottomWidth: 1,
+    },
+    PurchaseContainer: {
+      // flex: 2,
+      // flexDirection: "column",
+      height: "15%",
+      alignItems: "center",
+      // marginTop: 125,
+      // backgroundColor: "yellow",
+      padding: 0,
+    },
+    PurchaseButton: {
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 14,
+      marginTop: 30,
+      width: 190,
+      borderRadius: 50,
+      elevation: 3,
+      backgroundColor: "#F2A842",
+    },
+    PurchaseText: {
+      fontSize: 19,
+      textAlign: "center",
+      lineHeight: 21,
+      fontWeight: "500",
+      letterSpacing: 0.25,
+      color: "white",
     },
   });
   

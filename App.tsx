@@ -35,7 +35,7 @@ import AdmissionProductsScreen from "./src/screens/AdmissionProductsScreen";
 import AdmissionShoppingCartScreen from "./src/screens/AdmissionShoppingCartScreen";
 import AdmissionCheckoutScreen from "./src/screens/AdmissionCheckoutScreen";
 import Schedule from "./src/screens/Schedule";
-import Fundraiser from "./src/screens/Fundraiser";
+import Fundraiser from "./src/screens/Fundraisers";
 import FundraiserModalScreen from "./src/screens/FundraiserDonateScreen";
 import PaymentScreen from "./src/screens/Misc/PaymentScreen";
 

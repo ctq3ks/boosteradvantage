@@ -37,8 +37,7 @@ import { reloadAsync } from "expo-updates";
 import { IconBluetooth } from "@aws-amplify/ui-react";
 import { useStripe } from "@stripe/stripe-react-native";
 
-
-import styles from './styles';
+import styles from "./styles";
 // import Basket from "../components/Basket";
 
 // import Icons from '@fortawesome/free-regular-svg-icons';

@@ -16,7 +16,7 @@ import Icon from "@expo/vector-icons/Ionicons";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
-import Fundraiser from "../screens/Fundraiser";
+import FundraisersScreen from "../screens/Fundraisers";
 import FundraiserModalScreen from "../screens/FundraiserDonateScreen";
 
 import { StripeProvider } from "@stripe/stripe-react-native";
@@ -40,7 +40,7 @@ function FundraiserStackScreen() {
       <FundraiserStack.Screen
         options={{ headerShown: false }}
         name="Fundraiser"
-        component={Fundraiser}
+        component={FundraisersScreen}
       />
       <FundraiserStack.Screen
         options={{ headerShown: false }}

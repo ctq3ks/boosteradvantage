@@ -13,9 +13,11 @@ const BusinessCategory = {
   "SERVICE": "SERVICE"
 };
 
-const { BoosterPass, BusinessAdmin, Business, Coupon, Product, CartProduct, OrderProduct, Order } = initSchema(schema);
+const { DonorProfile, Fundraiser, BoosterPass, BusinessAdmin, Business, Coupon, Product, CartProduct, OrderProduct, Order, PaymentIntent } = initSchema(schema);
 
 export {
+  DonorProfile,
+  Fundraiser,
   BoosterPass,
   BusinessAdmin,
   Business,
@@ -25,5 +27,6 @@ export {
   OrderProduct,
   Order,
   CouponType,
-  BusinessCategory
+  BusinessCategory,
+  PaymentIntent
 };

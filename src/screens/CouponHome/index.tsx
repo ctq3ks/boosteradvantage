@@ -23,7 +23,8 @@ import * as queries from "../../graphql/queries";
 import { S3Image } from "aws-amplify-react-native";
 import { Business, Coupon } from "../../models";
 import { Storage } from "@aws-amplify/storage";
-import images from "../../components/compLogos.js";
+
+import BusinessView from "../../components/BusinessView.js";
 
 import { format } from 'date-fns';
 
@@ -144,90 +145,63 @@ const FilterBusinessModalswithList = ({nav}) => {
     //     .catch(err => console.log(err));
     // };
 
-    const compLogoUrl = (comp) => {
-      switch (comp) {
-        case "Weird Brothers Coffee":
-          return images.weirdbrotherscoffee;
-          break;
+    // const compLogoUrl = (comp) => {
+    //   switch (comp) {
+    //     case "Weird Brothers Coffee":
+    //       return images.weirdbrotherscoffee;
+    //       break;
 
-        case "Reds Table":
-          return images.redstable;
-          break;
+    //     case "Reds Table":
+    //       return images.redstable;
+    //       break;
 
-        case "Chick-fil-a":
-          return images.chickfila;
-          break;
+    //     case "Chick-fil-a":
+    //       return images.chickfila;
+    //       break;
 
-        case "Glory Days":
-          return images.glorydaysgrill;
-          break;
+    //     case "Glory Days":
+    //       return images.glorydaysgrill;
+    //       break;
 
-        case "Pupatella":
-          return images.pupatella;
-          break;
+    //     case "Pupatella":
+    //       return images.pupatella;
+    //       break;
 
-        case "Capstone Chiropractic LLC":
-          return images.capstonechiropractic;
-          break;
+    //     case "Capstone Chiropractic LLC":
+    //       return images.capstonechiropractic;
+    //       break;
 
-        case "Hand & Stone":
-          return images.handandstone;
-          break;
+    //     case "Hand & Stone":
+    //       return images.handandstone;
+    //       break;
 
-        case "VTFC Physical Therapy":
-          return images.VTFC;
-          break;
+    //     case "VTFC Physical Therapy":
+    //       return images.VTFC;
+    //       break;
 
-        case "Champscape":
-          return images.champscape;
-          break;
+    //     case "Champscape":
+    //       return images.champscape;
+    //       break;
 
-        case "Webers Pet Supermarket":
-          return images.weberspetsupermarket;
-          break;
-      }
-    };
+    //     case "Webers Pet Supermarket":
+    //       return images.weberspetsupermarket;
+    //       break;
+    //   }
+    // };
 
     return (  
       <SafeAreaView style={styles.scrollviewcontainer}>
         <ScrollView contentContainerStyle={{ paddingBottom: 160 }}>
           {Businesses.map((business) => {
-            const comp = compLogoUrl(business.name);
-            // console.log(business);
+            // const comp = compLogoUrl(business.name);
+            console.log(business);
             // console.log(Coupons);
             // const coupon_items = business.coupons;
             
-            const coupon_items = Coupons.filter((coup) => (coup.business == null) ? null : coup.business.id == business.id)
+            const coupon_items = Coupons.filter((coup) => (coup.businessID == null) ? null : coup.businessID == business.id)
     
             return (
-              <View key={business.id} style={styles.BusinessContainer}>
-                <View style={styles.TopSectionBusinessContainer}>
-                  <Image style={styles.BusinessLogo} source={comp} />
-                  <View style={styles.TopSectionBusinessContainerText}>
-                    <Text style={styles.BusinessLocationText}>
-                      <Text style={styles.BusinessHeadingText}>
-                        {business.name}
-                      </Text>
-                      {`\n${business.location}`}
-                    </Text>
-                  </View>
-                </View>
-
-                <View>
-                  {coupon_items.map((coupon) => {
-                    return (
-                      <Pressable key={coupon.id} onPress={() => nav.navigate("CouponsDisplay", { coupon: coupon, business: business })} style={styles.CouponItemContainer}>
-                        <View style={styles.CouponItemContainerDescription}>
-                          <Text>{coupon.itemDescription}</Text>
-                        </View>
-                        <View style={styles.CouponItemContainerExpiration}>
-                          <Text>{format(new Date(coupon.expirationDate), 'MMMM d, yyyy')}</Text>
-                        </View>
-                      </Pressable>
-                    );
-                  })}
-                </View>
-              </View>
+              <BusinessView key={business.id} navigation={nav} business={business} coupon_items={coupon_items}/>
             );
           })}
         </ScrollView>

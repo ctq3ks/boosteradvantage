@@ -83,7 +83,7 @@ const donors = [
 ];
 
 function FundraiserDonateScreen({ route, navigation }) {
-  const { fundraiser } = route.params;
+  const { fundraiser, image} = route.params;
   return (
     // <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
     //   <Text style={{ fontSize: 30 }}>{JSON.stringify(fundraiser.Description)}</Text>
@@ -100,19 +100,27 @@ function FundraiserDonateScreen({ route, navigation }) {
       </View>
       <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
         <View style={styles.FundraiserContainer}>
-          <View style={styles.FundraiserImageContainer}>
+          {/* <View style={styles.FundraiserImageContainer}>
             <Image
               style={styles.FundraiserHeaderImage}
               source={require("../../../assets/slbaseballteam.jpeg")}
             />
+          </View> */}
+          {image.length > 0 ? (
+          <View style={styles.FundraiserImageContainer}>
+            <Image
+              source={{ uri: image }}
+              style={styles.FundraiserHeaderImage}
+            />
           </View>
+        ) : null}
           <View style={styles.DescriptionFundraiserContainer}>
             <Text style={styles.FundraiserDescriptionText}>
-              {fundraiser.Description}
+              {fundraiser.title}
             </Text>
             <View style={styles.ProgressBar}>
             <Progress.Bar
-              progress={fundraiser.CurrentAmount / fundraiser.GoalAmount}
+              progress={fundraiser.dollarsRaised / fundraiser.dollarsGoal}
               width={325}
               height={10}
               color={"green"}
@@ -121,9 +129,9 @@ function FundraiserDonateScreen({ route, navigation }) {
             </View>
             <Text style={styles.FundraiserFundedText}>
               {"$" +
-                fundraiser.CurrentAmount +
+                fundraiser.dollarsRaised +
                 " raised of the $" +
-                fundraiser.GoalAmount +
+                fundraiser.dollarsGoal +
                 " goal"}
             </Text>
             <View style={styles.DonateContainer}>
@@ -132,7 +140,7 @@ function FundraiserDonateScreen({ route, navigation }) {
               </Pressable>
             </View>
             <Text style={styles.FundraiserFundedText}>
-              {fundraiser.Team + " - " + fundraiser.Date}
+              {fundraiser.fundee + " - " + fundraiser.raiseByDate}
             </Text>
             <View style={styles.separator} />
             <View style={styles.SponsorContainer}>
@@ -146,19 +154,19 @@ function FundraiserDonateScreen({ route, navigation }) {
                 </View>
                 <View style={styles.SponsorFundraiserTextContainer}>
                   <Text style={styles.SponsorFundraiserText}>
-                    {fundraiser.Promotion}
+                    {fundraiser.businessPromo}
                   </Text>
                 </View>
               </View>
               <View style={styles.SponsorAboutContainer}>
-                <Text style={styles.SponsorAboutText}>{fundraiser.About}</Text>
+                <Text style={styles.SponsorAboutText}>Dev Technology provides IT solutions to meet the mission-critical needs of government by exceeding our clients’ expectations through partnership, a commitment to team work, collaboration, and valuing our employees.</Text>
               </View>
             </View>
             <View style={styles.separator} />
           </View>
           <View style={styles.DonationsContainer}>
             <Text style={styles.SponsorHeaderText}>
-              Donors ({fundraiser.Donations})
+              Donors ({10})
             </Text>
             {donors.splice(0,3).map((donor) => {
               // const comp = compLogoUrl(item.name);
