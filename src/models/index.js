@@ -2,18 +2,31 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-const CouponCategory = {
+const CouponType = {
+  "PRICE": "PRICE",
+  "ITEM": "ITEM"
+};
+
+const BusinessCategory = {
   "RESTAURANT": "RESTAURANT",
-  "SALON": "SALON",
+  "WELLNESS": "WELLNESS",
   "SERVICE": "SERVICE"
 };
 
-const { BoosterPass, User, Coupon, Business } = initSchema(schema);
+const { DonorProfile, Fundraiser, BoosterPass, BusinessAdmin, Business, Coupon, Product, CartProduct, OrderProduct, Order, PaymentIntent } = initSchema(schema);
 
 export {
+  DonorProfile,
+  Fundraiser,
   BoosterPass,
-  User,
-  Coupon,
+  BusinessAdmin,
   Business,
-  CouponCategory
+  Coupon,
+  Product,
+  CartProduct,
+  OrderProduct,
+  Order,
+  CouponType,
+  BusinessCategory,
+  PaymentIntent
 };

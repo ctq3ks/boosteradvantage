@@ -3,11 +3,15 @@
   "serviceConfiguration": {
     "apiName": "boosteradvantage",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-75dfe4d3-61da-4cae-9110-f018660e4165/amplify/backend/api/boosteradvantage/schema.graphql",
     "defaultAuthType": {
-      "mode": "AWS_IAM"
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authboosteradvantage"
     },
-    "additionalAuthTypes": [],
+    "additionalAuthTypes": [
+      {
+        "mode": "AWS_IAM"
+      }
+    ],
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"

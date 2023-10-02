@@ -1,36 +1,121 @@
-enum CouponCategory {
+type Mutation {
+  createPaymentIntent(amount: Int!): PaymentIntent!
+    @function(name: "CreatePaymentIntent-${env}")
+    @auth(rules: [{ allow: private }])
+}
+
+type PaymentIntent {
+  clientSecret: String!
+}
+
+type DonorProfile @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  userSub: String
+  totalRaised: Float
+}
+
+type Fundraiser @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  title: String
+  dollarsRaised: Float
+  dollarsGoal: Float
+  raiseByDate: AWSDate
+  businessBool: Boolean
+  businessPromo: String
+  donors: AWSJSON
+  image: String
+  fundee: String
+  isActive: Boolean
+  businessID: ID @index(name: "byBusiness")
+}
+
+enum CouponType {
+  PRICE
+  ITEM
+}
+
+enum BusinessCategory {
   RESTAURANT
-  SALON
+  WELLNESS
   SERVICE
 }
 
-type BoosterPass @model @auth(rules: [{allow: private, provider: iam}]) {
+type BoosterPass @model @auth(rules: [{allow: private}]) {
   id: ID!
-  isUsed: Boolean
+  isUsed: Boolean!
+  userID: String!
+  type: String
 }
 
-type User @model @auth(rules: [{allow: private, provider: iam}]) {
+type BusinessAdmin @model @auth(rules: [{allow: private}]) {
   id: ID!
   email: AWSEmail
   phonenumber: AWSPhone
   username: String
-  Coupons: [Coupon] @hasMany(indexName: "byUser", fields: ["id"])
-  BoosterPass: BoosterPass @hasOne
+  businessID: ID!
 }
 
-type Business @model @auth(rules: [{allow: private, provider: iam}]) {
+type Business @model @auth(rules: [{allow: private}, {allow: groups, groups: ["boosterAdvantageAdmin"], operations: [read, create, update, delete]}]) {
   id: ID!
-  name: String!
-  description: String
-  coupons: [Coupon] @hasMany
+  name: String
+  location: String
+  coupons: [Coupon] @hasMany(indexName: "byBusiness", fields: ["id"])
+  category: BusinessCategory!
+  adminSub: String
+  contact: AWSPhone
+  logo: String
+  fundraisers: [Fundraiser] @hasMany(indexName: "byBusiness", fields: ["id"])
 }
 
-type Coupon @model @auth(rules: [{allow: private, provider: iam}]) {
-  id: ID
+type Coupon @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  couponType: CouponType
+  currentPrice: Float
+  discountPrice: Float
+  itemDescription: String!
+  startDate: AWSDate!
+  expirationDate: AWSDate!
+  businessID: ID! @index(name: "byBusiness")
+  termsAndConditions: String!
+  couponImage: String
+  boosterDonation: Float
+}
+
+type Product @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  title: String!
   description: String
-  business: Business @belongsTo
-  userID: ID @index(name: "byUser")
-  userSelected: Boolean
-  category: CouponCategory
+  price: Float!
+  oldPrice: Float
+}
+
+type CartProduct @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  userSub: String!
+  quantity: Int!
+  option: String
+  productID: ID!
+  product: Product @hasOne
+  productTitle: String
+}
+
+type OrderProduct @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  quantity: Int!
+  option: String
+  productID: ID
+  product: Product @hasOne
+  orderID: ID
+  order: Order @hasOne
+}
+
+type Order @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  userSub: String!
+  fullName: String!
+  phoneNumber: String
+  country: String
+  city: String
+  address: String
 }
  
